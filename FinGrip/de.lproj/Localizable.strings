@@ -1,0 +1,124 @@
+// General
+"app.name" = "FinGrip";
+"button.continue" = "Weiter";
+"button.cancel" = "Abbrechen";
+"button.save" = "Speichern";
+"button.get_started" = "Loslegen";
+"button.done" = "Fertig";
+
+// Settings
+"settings.title" = "Einstellungen";
+"settings.language" = "Sprache";
+"settings.currency" = "Währung";
+
+// Welcome Screen
+"welcome.title" = "Willkommen bei FinGrip";
+"welcome.subtitle" = "Ihr persönlicher Finanzbegleiter";
+
+// Goals
+"goals.select.title" = "Wählen Sie Ihre Finanzziele";
+"goals.select.subtitle" = "Wählen Sie die Ziele, die Sie verfolgen möchten. Sie können eigene Ziele hinzufügen oder aus unseren Vorschlägen wählen.";
+"goals.add.button" = "Eigenes Ziel Hinzufügen";
+"goals.continue.button" = "Weiter";
+"goals.add.title" = "Neues Ziel";
+"goals.field.title" = "Zielname";
+"goals.field.target_amount" = "Zielbetrag";
+"goals.preset.emergency_fund" = "Notfallfonds";
+"goals.preset.new_car" = "Neues Auto";
+"goals.preset.vacation" = "Urlaub";
+"goals.preset.home_renovation" = "Hausrenovierung";
+"goals.preset.education" = "Bildung";
+"goals.target.prefix" = "Ziel: ";
+
+// Score Details
+"score.title" = "Score-Details";
+"score.your_score" = "Ihr Finanzscore";
+"score.excellent" = "Ausgezeichnet";
+"score.breakdown.title" = "Score-Aufschlüsselung";
+"score.breakdown.payment_history" = "Zahlungshistorie";
+"score.breakdown.credit_utilization" = "Kreditauslastung";
+"score.breakdown.credit_age" = "Kreditalter";
+"score.breakdown.total_accounts" = "Gesamtkonten";
+"score.breakdown.recent_inquiries" = "Aktuelle Anfragen";
+"score.tips.title" = "Verbesserungstipps";
+"score.tips.utilization.title" = "Halten Sie die Kreditauslastung niedrig";
+"score.tips.utilization.description" = "Versuchen Sie, Ihre Kreditauslastung unter 30% des Limits zu halten.";
+"score.tips.payments.title" = "Pünktlich zahlen";
+"score.tips.payments.description" = "Richten Sie automatische Zahlungen ein, um keine Fälligkeit zu verpassen.";
+"score.tips.mix.title" = "Kreditvielfalt pflegen";
+"score.tips.mix.description" = "Ein vielfältiges Kreditportfolio kann zur Verbesserung Ihres Scores beitragen.";
+"score.continue.button" = "Zum Dashboard";
+
+// Dashboard
+"dashboard.home" = "Startseite";
+"dashboard.transactions" = "Transaktionen";
+"dashboard.goals" = "Ziele";
+"dashboard.profile" = "Profil";
+
+// Profile
+"profile.settings" = "Einstellungen";
+"profile.help" = "Hilfe & Support";
+"profile.about" = "Über";
+
+// Errors
+"error.generic" = "Etwas ist schief gelaufen";
+"error.try_again" = "Bitte versuchen Sie es später erneut";
+
+// Home Screen
+"home.title" = "Startseite";
+"home.total_balance" = "Gesamtsaldo";
+"home.income" = "Einnahmen";
+"home.expenses" = "Ausgaben";
+"home.quick_actions.score" = "Score Anzeigen";
+"home.quick_actions.quick_win" = "Schneller Erfolg";
+"home.active_challenges" = "Aktive Herausforderungen";
+
+// Onboarding
+"onboarding.welcome.title" = "Willkommen bei FinGrip";
+"onboarding.welcome.subtitle" = "Ihr Persönlicher Finanzassistent";
+"onboarding.welcome.currency" = "Währung Auswählen";
+
+"onboarding.bank.title" = "Verbinden Sie Ihre Bank";
+"onboarding.bank.subtitle" = "Sichere Kontoverbindung";
+"onboarding.bank.description" = "Wir verwenden Bankverschlüsselung zum Schutz Ihrer Daten";
+"onboarding.bank.select" = "Wählen Sie Ihre Bank";
+
+"onboarding.goals.title" = "Finanzielle Ziele Setzen";
+"onboarding.goals.subtitle" = "Was möchten Sie erreichen?";
+"onboarding.goals.emergency" = "Notfallfonds";
+"onboarding.goals.emergency.desc" = "Bauen Sie eine Reserve für unerwartete Ausgaben auf";
+"onboarding.goals.debt" = "Schulden Abbauen";
+"onboarding.goals.debt.desc" = "Erstellen Sie einen Schuldenabbauplan";
+"onboarding.goals.invest" = "Mit dem Investieren Beginnen";
+"onboarding.goals.invest.desc" = "Vermögensaufbau für die Zukunft";
+"onboarding.goals.budget" = "Besseres Budgeting";
+"onboarding.goals.budget.desc" = "Gewinnen Sie Kontrolle über Ihre Ausgaben";
+
+"onboarding.analysis.title" = "Analyse Ihrer Finanzen";
+"onboarding.analysis.processing" = "Bitte warten, wir verarbeiten Ihre Informationen";
+"onboarding.analysis.bank" = "Bankverbindung verifiziert";
+"onboarding.analysis.transactions" = "Transaktionshistorie analysiert";
+"onboarding.analysis.goals" = "Zielbewertung abgeschlossen";
+"onboarding.analysis.plan" = "Finanzplan erstellt";
+
+"onboarding.score.title" = "Ihr Finanzscore";
+"onboarding.score.ready" = "Überprüfen Sie Ihre Situation";
+"onboarding.score.description" = "Basierend auf Ihren Finanzdaten haben wir Ihren Score in Schlüsselbereichen berechnet";
+"onboarding.score.calculating" = "Analysiere Ihre Finanzdaten...";
+"onboarding.score.savings" = "Sparscore";
+"onboarding.score.debt" = "Schuldenscore";
+"onboarding.score.spending" = "Ausgabenscore";
+"onboarding.score.income" = "Einkommensscore";
+"onboarding.score.improve" = "Lassen Sie uns Ihren Score gemeinsam verbessern";
+
+"onboarding.quickwin.title" = "Schnelle Erfolge";
+"onboarding.quickwin.subtitle" = "Einfache Schritte zur Verbesserung Ihrer Finanzen";
+"onboarding.quickwin.item1" = "Automatisches Sparen einrichten";
+"onboarding.quickwin.item2" = "Abonnements überprüfen";
+"onboarding.quickwin.item3" = "Monatliches Budget erstellen";
+
+// Buttons
+"button.back" = "Zurück";
+"button.next" = "Weiter";
+"button.finish" = "Fertig";
+"button.connect" = "Verbinden"; 

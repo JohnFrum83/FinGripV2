@@ -1,0 +1,81 @@
+// General
+"app.name" = "FinGrip";
+
+// Buttons
+"button.next" = "Next";
+"button.finish" = "Finish";
+"button.back" = "Back";
+"button.connect" = "Connect";
+"button.get_started" = "Get Started";
+"button.complete" = "Complete";
+"button.select_bank" = "Select Bank";
+"button.done" = "Done";
+"button.save" = "Save";
+"button.cancel" = "Cancel";
+"button.add" = "Add";
+"button.edit" = "Edit";
+"button.delete" = "Delete";
+
+// Analytics
+"analytics.title" = "Analytics";
+"analytics.period.week" = "Week";
+"analytics.period.month" = "Month";
+"analytics.expenses" = "Expenses";
+"analytics.income" = "Income";
+"analytics.balance" = "Balance";
+"analytics.no_data" = "No data available";
+
+// Navigation
+"tab.home" = "Home";
+"tab.goals" = "Goals";
+"tab.analytics" = "Analytics";
+"tab.profile" = "Profile";
+"tab.transactions" = "Transactions";
+"tab.budget" = "Budget";
+
+// Profile
+"profile.title" = "Profile";
+"profile.section.account" = "ACCOUNT";
+"profile.account.details" = "Account Details";
+"profile.account.bank" = "Bank Connection";
+"profile.section.preferences" = "PREFERENCES";
+"profile.preferences.language" = "Language";
+"profile.preferences.currency" = "Currency";
+"profile.preferences.dark_mode" = "Dark Mode";
+"profile.section.notifications" = "NOTIFICATIONS";
+"profile.notifications.enabled" = "Enable Notifications";
+"profile.notifications.preferences" = "Notification Preferences";
+"profile.section.security" = "SECURITY";
+"profile.security.biometric" = "Use Face ID";
+"profile.security.privacy" = "Privacy Settings";
+"profile.section.help" = "HELP";
+"profile.help.faq" = "FAQ";
+"profile.help.support" = "Support";
+"profile.section.about" = "ABOUT";
+"profile.about.terms" = "Terms of Service";
+"profile.about.privacy" = "Privacy Policy";
+"profile.about.version" = "Version";
+
+// Onboarding
+"onboarding.welcome.title" = "Welcome to FinGrip";
+"onboarding.welcome.subtitle" = "Your Personal Finance Assistant";
+"onboarding.welcome.currency" = "Choose Your Currency";
+"onboarding.bank.title" = "Connect Your Bank";
+"onboarding.bank.subtitle" = "Secure Account Connection";
+"onboarding.bank.description" = "We use bank-grade encryption to protect your data";
+"onboarding.goals.title" = "Set Your Financial Goals";
+"onboarding.goals.subtitle" = "What would you like to achieve?";
+"onboarding.analysis.title" = "Analyzing Your Finances";
+"onboarding.analysis.processing" = "Please wait while we process your information";
+"onboarding.analysis.bank" = "Bank connection verified";
+"onboarding.analysis.transactions" = "Transaction history analyzed";
+"onboarding.analysis.goals" = "Goals assessment complete";
+"onboarding.analysis.plan" = "Financial plan created";
+"onboarding.score.title" = "Your Financial Score";
+"onboarding.score.ready" = "Here's How You're Doing";
+"onboarding.score.description" = "Track your financial health and get personalized recommendations";
+"onboarding.quickwin.title" = "Quick Wins";
+"onboarding.quickwin.subtitle" = "Easy steps to improve your finances";
+"onboarding.quickwin.item1" = "Set up automatic savings";
+"onboarding.quickwin.item2" = "Review your subscriptions";
+"onboarding.quickwin.item3" = "Create a monthly budget"; 

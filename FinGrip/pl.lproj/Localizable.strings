@@ -1,0 +1,148 @@
+// General
+"app.name" = "FinGrip";
+
+// Buttons
+"button.next" = "Dalej";
+"button.finish" = "Zakończ";
+"button.back" = "Wstecz";
+"button.connect" = "Połącz";
+"button.get_started" = "Rozpocznij";
+"button.complete" = "Zakończ";
+"button.select_bank" = "Wybierz Bank";
+"button.done" = "Gotowe";
+"button.save" = "Zapisz";
+"button.cancel" = "Anuluj";
+"button.add" = "Dodaj";
+"button.edit" = "Edytuj";
+"button.delete" = "Usuń";
+
+// Analytics
+"analytics.title" = "Analityka";
+"analytics.period.week" = "Tydzień";
+"analytics.period.month" = "Miesiąc";
+"analytics.expenses" = "Wydatki";
+"analytics.income" = "Przychód";
+"analytics.balance" = "Saldo";
+"analytics.no_data" = "Brak dostępnych danych";
+"analytics.summary.savings" = "Suma Oszczędności";
+"analytics.summary.spending" = "Suma Wydatków";
+"analytics.chart.income" = "Przychód";
+"analytics.chart.expenses" = "Wydatki";
+"analytics.chart.transactions" = "Transakcje";
+"analytics.chart.placeholder" = "Brak dostępnych danych";
+
+// Navigation
+"tab.home" = "Start";
+"tab.goals" = "Cele";
+"tab.analytics" = "Analityka";
+"tab.profile" = "Profil";
+"tab.transactions" = "Transakcje";
+"tab.budget" = "Budżet";
+
+// Profile
+"profile.title" = "Profil";
+"profile.section.account" = "KONTO";
+"profile.account.details" = "Szczegóły Konta";
+"profile.account.bank" = "Połączenie z Bankiem";
+"profile.section.preferences" = "PREFERENCJE";
+"profile.preferences.language" = "Język";
+"profile.preferences.currency" = "Waluta";
+"profile.preferences.dark_mode" = "Tryb Ciemny";
+"profile.section.notifications" = "POWIADOMIENIA";
+"profile.notifications.enabled" = "Włącz Powiadomienia";
+"profile.notifications.preferences" = "Ustawienia Powiadomień";
+"profile.section.security" = "BEZPIECZEŃSTWO";
+"profile.security.biometric" = "Użyj Face ID";
+"profile.security.privacy" = "Ustawienia Prywatności";
+"profile.section.help" = "POMOC";
+"profile.help.faq" = "FAQ";
+"profile.help.support" = "Wsparcie";
+"profile.section.about" = "O APLIKACJI";
+"profile.about.terms" = "Warunki Użytkowania";
+"profile.about.privacy" = "Polityka Prywatności";
+"profile.about.version" = "Wersja";
+
+// Onboarding
+"onboarding.welcome.title" = "Witaj w FinGrip";
+"onboarding.welcome.subtitle" = "Twój Osobisty Asystent Finansowy";
+"onboarding.welcome.currency" = "Wybierz Swoją Walutę";
+"onboarding.bank.title" = "Połącz Swój Bank";
+"onboarding.bank.subtitle" = "Bezpieczne Połączenie z Kontem";
+"onboarding.bank.description" = "Używamy szyfrowania bankowego do ochrony Twoich danych";
+"onboarding.goals.title" = "Ustaw Swoje Cele Finansowe";
+"onboarding.goals.subtitle" = "Co chciałbyś osiągnąć?";
+"onboarding.analysis.title" = "Analiza Twoich Finansów";
+"onboarding.analysis.processing" = "Proszę czekać, przetwarzamy Twoje informacje";
+"onboarding.analysis.bank" = "Połączenie z bankiem zweryfikowane";
+"onboarding.analysis.transactions" = "Historia transakcji przeanalizowana";
+"onboarding.analysis.goals" = "Ocena celów zakończona";
+"onboarding.analysis.plan" = "Plan finansowy utworzony";
+"onboarding.score.title" = "Twój Wynik Finansowy";
+"onboarding.score.ready" = "Oto Jak Ci Idzie";
+"onboarding.score.description" = "Śledź swoją kondycję finansową i otrzymuj spersonalizowane rekomendacje";
+"onboarding.quickwin.title" = "Szybkie Zwycięstwa";
+"onboarding.quickwin.subtitle" = "Łatwe kroki do poprawy finansów";
+"onboarding.quickwin.item1" = "Ustaw automatyczne oszczędzanie";
+"onboarding.quickwin.item2" = "Przejrzyj swoje subskrypcje";
+"onboarding.quickwin.item3" = "Stwórz miesięczny budżet";
+
+// Settings
+"settings.title" = "Ustawienia";
+"settings.language" = "Język";
+"settings.currency" = "Waluta";
+
+// Welcome Screen
+"welcome.title" = "Witaj w FinGrip";
+"welcome.subtitle" = "Twój osobisty asystent finansowy";
+
+// Goals
+"goals.title" = "Cele Finansowe";
+"goals.subtitle" = "Ustaw i śledź swoje cele finansowe";
+"goals.select.title" = "Wybierz Swoje Cele Finansowe";
+"goals.select.subtitle" = "Wybierz z predefiniowanych celów lub stwórz własne cele do śledzenia swojej podróży finansowej.";
+"goals.continue.button" = "Kontynuuj";
+"goals.add.button" = "Dodaj Własny Cel";
+
+// Preset Goals
+"goals.savings" = "Zbuduj Fundusz Awaryjny";
+"goals.debt" = "Spłać Zadłużenie";
+"goals.investment" = "Rozpocznij Inwestowanie";
+"goals.budget" = "Stwórz Budżet";
+
+// Score Details
+"score.title" = "Szczegóły Wyniku";
+"score.your_score" = "Twój Wynik Finansowy";
+"score.excellent" = "Doskonały";
+"score.breakdown.title" = "Składniki Wyniku";
+"score.breakdown.payment_history" = "Historia Płatności";
+"score.breakdown.credit_utilization" = "Wykorzystanie Kredytu";
+"score.breakdown.credit_age" = "Wiek Kredytu";
+"score.breakdown.total_accounts" = "Liczba Kont";
+"score.breakdown.recent_inquiries" = "Ostatnie Zapytania";
+"score.tips.title" = "Wskazówki do Poprawy";
+"score.tips.utilization.title" = "Utrzymuj niskie wykorzystanie kredytu";
+"score.tips.utilization.description" = "Staraj się utrzymywać wykorzystanie kredytu poniżej 30% limitu.";
+"score.tips.payments.title" = "Płać na czas";
+"score.tips.payments.description" = "Ustaw automatyczne płatności, aby nigdy nie przegapić terminu.";
+"score.tips.mix.title" = "Utrzymuj różnorodność kredytową";
+"score.tips.mix.description" = "Zróżnicowane portfolio kredytowe może pomóc w poprawie wyniku.";
+"score.continue.button" = "Przejdź do Panelu";
+
+// Dashboard
+"dashboard.home" = "Strona Główna";
+"dashboard.transactions" = "Transakcje";
+"dashboard.goals" = "Cele";
+"dashboard.profile" = "Profil";
+
+// Errors
+"error.generic" = "Coś poszło nie tak";
+"error.try_again" = "Spróbuj ponownie później";
+
+// Home Screen
+"home.title" = "Start";
+"home.total_balance" = "Saldo Całkowite";
+"home.income" = "Przychód";
+"home.expenses" = "Wydatki";
+"home.quick_actions.score" = "Zobacz Wynik";
+"home.quick_actions.quick_win" = "Szybkie Zwycięstwo";
+"home.active_challenges" = "Aktywne Wyzwania"; 
