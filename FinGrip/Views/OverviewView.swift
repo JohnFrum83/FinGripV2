@@ -14,124 +14,96 @@ struct OverviewView: View {
     @EnvironmentObject private var localizationManager: LocalizationManager
     
     var body: some View {
-        NavigationView {
-            ScrollView {
-                VStack(spacing: 20) {
-                    // Balance card
-                    balanceCard
+        ScrollView {
+            VStack(spacing: 24) {
+                // Balance Section
+                VStack(alignment: .leading, spacing: 8) {
+                    Text(LocalizationKey.overviewBalance.localized)
+                        .font(.headline)
+                        .foregroundColor(.secondary)
                     
-                    // Recent transactions
-                    recentTransactionsSection
-                    
-                    // Goals progress
-                    goalsProgressSection
-                    
-                    // Spending categories
-                    spendingCategoriesSection
+                    Text(contentViewModel.currentBalance.currencyFormatted())
+                        .font(.system(size: 34, weight: .bold))
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding()
+                        .background(Color(.systemBackground))
+                        .cornerRadius(12)
                 }
+                .frame(maxWidth: .infinity, alignment: .leading)
                 .padding()
-            }
-            .navigationTitle(LocalizationKey.overviewTitle.localized)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button {
-                        // TODO: Implement refresh
-                    } label: {
-                        Image(systemName: "arrow.clockwise")
+                .background(Color(.systemBackground))
+                .cornerRadius(12)
+                .shadow(radius: 2)
+                
+                // Recent Transactions Section
+                VStack(alignment: .leading, spacing: 16) {
+                    HStack {
+                        Text(LocalizationKey.overviewRecentTransactions.localized)
+                            .font(.headline)
+                        
+                        Spacer()
+                        
+                        NavigationLink("See All") {
+                            TransactionsView()
+                        }
+                        .font(.subheadline)
+                    }
+                    
+                    ForEach(contentViewModel.recentTransactions) { transaction in
+                        TransactionRow(transaction: transaction)
                     }
                 }
-            }
-        }
-    }
-    
-    private var balanceCard: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text(LocalizationKey.overviewBalance.localized)
-                .font(.headline)
-                .foregroundColor(.secondary)
-            
-            Text(contentViewModel.formattedBalance)
-                .font(.system(size: 36, weight: .bold))
-            
-            HStack {
-                Text(LocalizationKey.overviewIncome.localized)
-                    .foregroundColor(.green)
-                Text(contentViewModel.formattedIncome)
-                    .foregroundColor(.green)
+                .padding()
+                .background(Color(.systemBackground))
+                .cornerRadius(12)
+                .shadow(radius: 2)
                 
-                Spacer()
-                
-                Text(LocalizationKey.overviewExpenses.localized)
-                    .foregroundColor(.red)
-                Text(contentViewModel.formattedExpenses)
-                    .foregroundColor(.red)
-            }
-            .font(.subheadline)
-        }
-        .padding()
-        .background(Color(.systemBackground))
-        .cornerRadius(12)
-        .shadow(radius: 2)
-    }
-    
-    private var recentTransactionsSection: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            Text(LocalizationKey.overviewRecentTransactions.localized)
-                .font(.headline)
-            
-            ForEach(contentViewModel.recentTransactions) { transaction in
-                TransactionRow(transaction: transaction)
-            }
-            
-            NavigationLink(destination: TransactionsView()) {
-                Text(LocalizationKey.overviewViewAllTransactions.localized)
-                    .foregroundColor(.blue)
-            }
-        }
-        .padding()
-        .background(Color(.systemBackground))
-        .cornerRadius(12)
-        .shadow(radius: 2)
-    }
-    
-    private var goalsProgressSection: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            Text(LocalizationKey.overviewGoals.localized)
-                .font(.headline)
-            
-            ForEach(contentViewModel.activeGoals) { goal in
-                GoalRow(goal: goal)
-            }
-            
-            NavigationLink(destination: GoalsView()) {
-                Text(LocalizationKey.overviewViewAllGoals.localized)
-                    .foregroundColor(.blue)
-            }
-        }
-        .padding()
-        .background(Color(.systemBackground))
-        .cornerRadius(12)
-        .shadow(radius: 2)
-    }
-    
-    private var spendingCategoriesSection: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            Text(LocalizationKey.overviewSpendingCategories.localized)
-                .font(.headline)
-            
-            ForEach(contentViewModel.spendingCategories) { category in
-                HStack {
-                    Text(category.name)
-                    Spacer()
-                    Text(category.formattedAmount)
-                        .foregroundColor(.secondary)
+                // Goals Section
+                VStack(alignment: .leading, spacing: 16) {
+                    HStack {
+                        Text(LocalizationKey.overviewGoals.localized)
+                            .font(.headline)
+                        
+                        Spacer()
+                        
+                        NavigationLink("See All") {
+                            GoalsView()
+                        }
+                        .font(.subheadline)
+                    }
+                    
+                    ForEach($contentViewModel.goals) { $goal in
+                        GoalRow(goal: goal)
+                    }
                 }
+                .padding()
+                .background(Color(.systemBackground))
+                .cornerRadius(12)
+                .shadow(radius: 2)
+                
+                // Spending Categories Section
+                VStack(alignment: .leading, spacing: 16) {
+                    Text(LocalizationKey.overviewSpendingCategories.localized)
+                        .font(.headline)
+                    
+                    ForEach($contentViewModel.spendingCategories) { $category in
+                        HStack {
+                            Text($category.name.wrappedValue)
+                            Spacer()
+                            Text("$\($category.currentSpending.wrappedValue, specifier: "%.2f")")
+                        }
+                        .padding(.vertical, 8)
+                    }
+                }
+                .padding()
+                .background(Color(.systemBackground))
+                .cornerRadius(12)
+                .shadow(radius: 2)
             }
+            .padding()
         }
-        .padding()
-        .background(Color(.systemBackground))
-        .cornerRadius(12)
-        .shadow(radius: 2)
+        .navigationTitle(LocalizationKey.overviewTitle.localized)
+        .background(Color(.systemGroupedBackground))
     }
 }
 

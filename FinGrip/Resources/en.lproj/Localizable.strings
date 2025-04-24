@@ -1,156 +1,146 @@
 // General
 "app.name" = "FinGrip";
 
-// Goals Screen
-"goals.title" = "Financial Goals";
-"goals.subtitle" = "Set and track your financial goals";
-"goals.select.title" = "Select Your Financial Goals";
-"goals.select.subtitle" = "Choose from our preset goals or create your own custom goals to track your financial journey.";
-"goals.continue.button" = "Continue";
-"goals.add.button" = "Add Custom Goal";
-
-// Preset Goals
-"goals.savings" = "Build Emergency Fund";
-"goals.debt" = "Pay Off Debt";
-"goals.investment" = "Start Investing";
-"goals.budget" = "Create Budget";
-
-// Analytics
-"analytics.title" = "Analytics";
-"analytics.subtitle" = "Track your financial progress";
-"analytics.period.week" = "Week";
-"analytics.period.month" = "Month";
-"analytics.savings" = "Savings";
-"analytics.debt" = "Debt";
-"analytics.spending" = "Spending";
-"analytics.income" = "Income";
-"analytics.balance" = "Balance";
-"analytics.no_data" = "No data available";
+// Common Actions
+"welcome" = "Welcome";
+"continue" = "Continue";
+"next" = "Next";
+"back" = "Back";
+"save" = "Save";
+"cancel" = "Cancel";
+"common.done" = "Done";
+"common.points" = "points";
+"points.format" = "%dpts";
 
 // Navigation
 "tab.home" = "Home";
-"tab.dashboard" = "Dashboard";
-"tab.transactions" = "Transactions";
 "tab.goals" = "Goals";
+"tab.transactions" = "Transactions";
 "tab.analytics" = "Analytics";
 "tab.profile" = "Profile";
-"tab.budget" = "Budget";
-
-// Onboarding
-"onboarding.welcome.title" = "Welcome to FinGrip";
-"onboarding.welcome.subtitle" = "Your Personal Finance Assistant";
-"onboarding.welcome.currency" = "Choose Your Currency";
-
-"onboarding.bank.title" = "Connect Your Bank";
-"onboarding.bank.subtitle" = "Secure Account Connection";
-"onboarding.bank.description" = "We use bank-grade encryption to protect your data";
-"onboarding.bank.select" = "Select your bank";
-
-"onboarding.goals.title" = "Set Your Financial Goals";
-"onboarding.goals.subtitle" = "What would you like to achieve?";
-"onboarding.goals.emergency" = "Emergency Fund";
-"onboarding.goals.emergency.desc" = "Build a safety net for unexpected expenses";
-"onboarding.goals.debt" = "Pay Off Debt";
-"onboarding.goals.debt.desc" = "Create a plan to become debt-free";
-"onboarding.goals.invest" = "Start Investing";
-"onboarding.goals.invest.desc" = "Grow your wealth for the future";
-"onboarding.goals.budget" = "Budget Better";
-"onboarding.goals.budget.desc" = "Take control of your spending";
-
-"onboarding.analysis.title" = "Analyzing Your Finances";
-"onboarding.analysis.subtitle" = "Get insights into your spending habits";
-"onboarding.analysis.processing" = "Please wait while we process your information";
-"onboarding.analysis.bank" = "Bank connection verified";
-"onboarding.analysis.transactions" = "Transaction history analyzed";
-"onboarding.analysis.goals" = "Goals assessment complete";
-"onboarding.analysis.plan" = "Financial plan created";
-
-"onboarding.score.title" = "Your Financial Score";
-"onboarding.score.subtitle" = "Track your financial health";
-"onboarding.score.calculating" = "Analyzing your financial data...";
-"onboarding.score.ready" = "Here's How You're Doing";
-"onboarding.score.description" = "Track your financial health and get personalized recommendations";
-"onboarding.score.income" = "Income Score";
-"onboarding.score.improve" = "Let's improve your score together";
-
-"onboarding.quickwin.title" = "Quick Wins";
-"onboarding.quickwin.subtitle" = "Easy steps to improve your finances";
-"onboarding.quickwin.item1" = "Set up automatic savings";
-"onboarding.quickwin.item2" = "Review your subscriptions";
-"onboarding.quickwin.item3" = "Create a monthly budget";
-
-// Buttons
-"button.back" = "Back";
-"button.next" = "Next";
-"button.finish" = "Finish";
-"button.connect" = "Connect";
-"button.save" = "Save";
-"button.cancel" = "Cancel";
-"button.add" = "Add";
-"button.edit" = "Edit";
-"button.delete" = "Delete";
-"button.get_started" = "Get Started";
-"button.complete" = "Complete";
-"button.select_bank" = "Select Bank";
-"button.done" = "Done";
-
-// Preset Goals
-"goals.preset.emergency_fund" = "Emergency Fund";
-"goals.preset.new_car" = "New Car";
-"goals.preset.vacation" = "Vacation";
-"goals.preset.home_renovation" = "Home Renovation";
-"goals.preset.education" = "Education";
-
-// Goal Target
-"goals.target.prefix" = "Target: $";
-
-// Analytics
-"analytics.summary.savings" = "Total Savings";
-"analytics.summary.spending" = "Total Spending";
-"analytics.chart.income" = "Income";
-"analytics.chart.expenses" = "Expenses";
-"analytics.chart.transactions" = "Transactions";
-"analytics.chart.placeholder" = "No data available";
 
 // Home Screen
 "home.title" = "Home";
 "home.total_balance" = "Total Balance";
 "home.income" = "Income";
 "home.expenses" = "Expenses";
+"home.active_challenges" = "Active Challenges";
 "home.quick_actions.score" = "View Score";
 "home.quick_actions.quick_win" = "Quick Win";
-"home.active_challenges" = "Active Challenges";
+
+// Profile
+"profile.title" = "Profile";
+"profile.section.account" = "Account";
+"profile.account.details" = "Account Details";
+"profile.account.bank" = "Bank Connection";
+"profile.section.preferences" = "Preferences";
+"profile.preferences.language" = "Language";
+"profile.preferences.currency" = "Currency";
+"profile.preferences.darkMode" = "Dark Mode";
+"profile.section.notifications" = "Notifications";
+"profile.notifications.enabled" = "Enable Notifications";
+"profile.notifications.preferences" = "Notification Preferences";
+"profile.section.security" = "Security";
+"profile.security.biometric" = "Biometric Authentication";
 
 // Settings
 "settings.title" = "Settings";
 "settings.language" = "Language";
 "settings.currency" = "Currency";
+"settings.appearance" = "Appearance";
+"settings.darkmode" = "Dark Mode";
+"settings.notifications" = "Notifications";
+"settings.notifications.enable" = "Enable Notifications";
+"settings.data" = "Data";
+"settings.data.export" = "Export Data";
+"settings.privacy_policy" = "Privacy Policy";
+"settings.privacy_policy.content" = "Our Privacy Policy explains how we collect, use, and protect your personal information.";
+"settings.terms_of_service" = "Terms of Service";
+"settings.terms_of_service.content" = "By using FinGrip, you agree to our Terms of Service which outline your rights and responsibilities.";
 
-// Profile
-"profile.title" = "Profile";
-"profile.section.account" = "ACCOUNT";
-"profile.account.details" = "Account Details";
-"profile.account.bank" = "Bank Connection";
+// Onboarding
+"onboarding.welcome.title" = "Welcome to FinGrip";
+"onboarding.welcome.subtitle" = "Take control of your finances with smart tracking and insights";
+"onboarding.welcome.currency" = "Choose Your Currency";
+"button.get_started" = "Get Started";
+"button.complete" = "Complete Setup";
+"button.select_bank" = "Select Bank";
 
-"profile.section.preferences" = "PREFERENCES";
-"profile.preferences.currency" = "Currency";
-"profile.preferences.language" = "Language";
-"profile.preferences.dark_mode" = "Dark Mode";
+// Transactions
+"transactions.title" = "Transactions";
+"transactions.filter.all" = "All";
+"transactions.filter.income" = "Income";
+"transactions.filter.expenses" = "Expenses";
+"transactions.summary.income" = "Total Income";
+"transactions.summary.expenses" = "Total Expenses";
+"transaction.new" = "New Transaction";
+"transaction.details" = "Transaction Details";
+"transaction.amount" = "Amount";
 
-"profile.section.notifications" = "NOTIFICATIONS";
-"profile.notifications.enabled" = "Enable Notifications";
-"profile.notifications.preferences" = "Notification Preferences";
+// Analytics
+"analytics.title" = "Analytics";
+"analytics.total_spent" = "Total Spent";
+"analytics.income" = "Income";
+"analytics.expenses" = "Expenses";
+"analytics.period.week" = "Week";
+"analytics.period.month" = "Month";
+"analytics.period.year" = "Year";
+"analytics.summary.savings" = "Net Savings";
+"analytics.summary.spending" = "Total Spending";
+"analytics.chart.overview" = "Overview";
+"analytics.chart.categories" = "Categories";
+"analytics.chart.trends" = "Trends";
+"analytics.chart.placeholder" = "No data available";
+"analytics.categories.title" = "Spending Categories";
 
-"profile.section.security" = "SECURITY";
-"profile.security.biometric" = "Use Face ID";
-"profile.security.privacy" = "Privacy Settings";
+// Goals
+"goal.overdue" = "Overdue";
+"goal.days_left" = "%d days left";
+"goal.active" = "Active Goals";
 
-// Profile Sections
-"profile.section.help" = "HELP";
-"profile.help.faq" = "FAQ";
-"profile.help.support" = "Support";
+// Subscriptions
+"subscription.add.title" = "Add Subscription";
+"subscription.edit.title" = "Edit Subscription";
+"subscription.details.title" = "Subscription Details";
+"subscription.name" = "Name";
+"subscription.amount" = "Amount";
+"subscription.category.title" = "Category";
+"subscription.category" = "Category";
+"subscription.billing.title" = "Billing";
+"subscription.billing.cycle" = "Billing Cycle";
+"subscription.notes.title" = "Notes";
 
-"profile.section.about" = "ABOUT";
-"profile.about.terms" = "Terms of Service";
-"profile.about.privacy" = "Privacy Policy";
-"profile.about.version" = "Version"; 
+// Subscription Categories
+"subscription.category.streaming" = "Streaming";
+"subscription.category.utilities" = "Utilities";
+"subscription.category.software" = "Software";
+"subscription.category.gaming" = "Gaming";
+"subscription.category.fitness" = "Fitness";
+"subscription.category.food" = "Food & Dining";
+"subscription.category.shopping" = "Shopping";
+"subscription.category.other" = "Other";
+
+// Billing Cycles
+"subscription.billing.weekly" = "Weekly";
+"subscription.billing.monthly" = "Monthly";
+"subscription.billing.quarterly" = "Quarterly";
+"subscription.billing.yearly" = "Yearly";
+
+// Quick Wins
+"quickwin.title" = "Quick Wins";
+"quickwin.subtitle" = "Complete these tasks to improve your finances";
+"quickwin.start_journey" = "Start My Journey";
+
+// Quick Win Tasks
+"quickwin.track_expenses.title" = "Track Daily Expenses";
+"quickwin.track_expenses.description" = "Record all expenses for one week";
+"quickwin.auto_savings.title" = "Set Up Auto-Savings";
+"quickwin.auto_savings.description" = "Automate your savings with scheduled transfers";
+"quickwin.credit_report.title" = "Review Credit Report";
+"quickwin.credit_report.description" = "Check your credit score and report";
+"quickwin.small_debt.title" = "Pay Off Smaller Debt";
+"quickwin.small_debt.description" = "Focus on paying off your smallest debt first";
+"quickwin.emergency_fund.title" = "Create Emergency Fund";
+"quickwin.emergency_fund.description" = "Start saving for unexpected expenses";
+"quickwin.subscription_costs.title" = "Cut Subscription Costs";
+"quickwin.subscription_costs.description" = "Review and cancel unused subscriptions"; 

@@ -1,248 +1,79 @@
 import SwiftUI
 
-/// The main dashboard view that serves as the root of the application.
-/// This view manages the tab-based navigation and displays:
-/// - Overview tab with financial summary
-/// - Transactions tab for managing financial records
-/// - Goals tab for tracking financial objectives
-/// - Profile tab for user settings and account management
+/// The main tab-based navigation interface for the app.
+/// This view serves as the primary container for the app's main features,
+/// organizing them into distinct tabs for easy access.
 ///
-/// The view uses a TabView to organize different sections of the app
-/// and provides a consistent navigation experience.
+/// Features:
+/// - Home tab: Overview of financial status and quick actions
+/// - Goals tab: Financial goals tracking and management
+/// - Transactions tab: List and management of income/expenses
+/// - Analytics tab: Financial insights and reports
+/// - Profile tab: User settings and preferences
 struct DashboardTabView: View {
-    @EnvironmentObject private var contentViewModel: ContentViewModel
-    @EnvironmentObject private var localizationManager: LocalizationManager
+    /// Currently selected tab
+    @State private var selectedTab = 0
+    
+    /// The main view model shared across tabs
+    @StateObject private var viewModel = ContentViewModel()
     
     var body: some View {
-        TabView {
-            OverviewView()
+        TabView(selection: $selectedTab) {
+            // Home tab with financial overview
+            HomeView()
                 .tabItem {
-                    Label(LocalizationKey.tabOverview.localized, systemImage: "chart.bar.fill")
+                    Label(
+                        NSLocalizedString("tab.home", comment: "Home tab label"),
+                        systemImage: "house.fill"
+                    )
                 }
+                .tag(0)
             
-            TransactionsView()
-                .tabItem {
-                    Label(LocalizationKey.tabTransactions.localized, systemImage: "list.bullet")
-                }
-            
+            // Goals tracking and management
             GoalsView()
                 .tabItem {
-                    Label(LocalizationKey.tabGoals.localized, systemImage: "target")
+                    Label(
+                        NSLocalizedString("tab.goals", comment: "Goals tab label"),
+                        systemImage: "target"
+                    )
                 }
+                .tag(1)
             
+            // Transaction history and management
+            TransactionsView()
+                .tabItem {
+                    Label(
+                        NSLocalizedString("tab.transactions", comment: "Transactions tab label"),
+                        systemImage: "list.bullet"
+                    )
+                }
+                .tag(2)
+            
+            // Financial analytics and insights
+            AnalyticsView()
+                .tabItem {
+                    Label(
+                        NSLocalizedString("tab.analytics", comment: "Analytics tab label"),
+                        systemImage: "chart.bar.fill"
+                    )
+                }
+                .tag(3)
+            
+            // User profile and settings
             ProfileView()
                 .tabItem {
-                    Label(LocalizationKey.tabProfile.localized, systemImage: "person.fill")
+                    Label(
+                        NSLocalizedString("tab.profile", comment: "Profile tab label"),
+                        systemImage: "person.fill"
+                    )
                 }
+                .tag(4)
         }
+        .environmentObject(viewModel) // Share view model across all tabs
     }
 }
 
 /// Preview provider for DashboardTabView
 #Preview {
     DashboardTabView()
-        .environmentObject(ContentViewModel())
-        .environmentObject(LocalizationManager.shared)
-}
-
-struct ProfileView: View {
-    @EnvironmentObject private var localizationManager: LocalizationManager
-    @AppStorage("darkModeEnabled") private var darkModeEnabled = false
-    @AppStorage("notificationsEnabled") private var notificationsEnabled = true
-    @AppStorage("biometricEnabled") private var biometricEnabled = false
-    
-    var body: some View {
-        NavigationView {
-            List {
-                // ACCOUNT section
-                Section(header: Text("profile.section.account".localized)) {
-                    NavigationLink {
-                        Text("Account Details")
-                    } label: {
-                        Label {
-                            Text("profile.account.details".localized)
-                        } icon: {
-                            Image(systemName: "person.circle.fill")
-                                .foregroundColor(.blue)
-                        }
-                    }
-                    
-                    NavigationLink {
-                        Text("Bank Connection")
-                    } label: {
-                        Label {
-                            Text("profile.account.bank".localized)
-                        } icon: {
-                            Image(systemName: "building.columns.fill")
-                                .foregroundColor(.blue)
-                        }
-                    }
-                }
-                
-                // PREFERENCES section
-                Section(header: Text("profile.section.preferences".localized)) {
-                    NavigationLink {
-                        LanguageSelectionView()
-                    } label: {
-                        HStack {
-                            Text("profile.preferences.language".localized)
-                            Spacer()
-                            Text(localizationManager.selectedLanguage.displayName)
-                                .foregroundColor(.gray)
-                        }
-                    }
-                    
-                    NavigationLink {
-                        CurrencySelectionView()
-                    } label: {
-                        HStack {
-                            Text("profile.preferences.currency".localized)
-                            Spacer()
-                            Text("\(localizationManager.selectedCurrency.symbol) (\(localizationManager.selectedCurrency.rawValue))")
-                                .foregroundColor(.gray)
-                        }
-                    }
-                    
-                    Toggle("profile.preferences.dark_mode".localized, isOn: $darkModeEnabled)
-                }
-                
-                // DATA section
-                Section(header: Text("profile.section.data".localized)) {
-                    Button("profile.data.export".localized) {
-                        // TODO: Implement data export
-                    }
-                    
-                    Button("profile.data.clear_cache".localized) {
-                        // TODO: Implement cache clearing
-                    }
-                }
-                
-                // NOTIFICATIONS section
-                Section(header: Text("profile.section.notifications".localized)) {
-                    Toggle("profile.notifications.enabled".localized, isOn: $notificationsEnabled)
-                    
-                    NavigationLink {
-                        Text("Notification Preferences")
-                    } label: {
-                        Text("profile.notifications.preferences".localized)
-                    }
-                }
-                
-                // SECURITY section
-                Section(header: Text("profile.section.security".localized)) {
-                    Toggle("profile.security.biometric".localized, isOn: $biometricEnabled)
-                    
-                    NavigationLink {
-                        Text("Privacy Settings")
-                    } label: {
-                        Text("profile.security.privacy".localized)
-                    }
-                }
-                
-                // HELP section
-                Section(header: Text("profile.section.help".localized)) {
-                    NavigationLink {
-                        Text("FAQ")
-                    } label: {
-                        Label {
-                            Text("profile.help.faq".localized)
-                        } icon: {
-                            Image(systemName: "questionmark.circle.fill")
-                                .foregroundColor(.blue)
-                        }
-                    }
-                    
-                    NavigationLink {
-                        Text("Support")
-                    } label: {
-                        Label {
-                            Text("profile.help.support".localized)
-                        } icon: {
-                            Image(systemName: "envelope.fill")
-                                .foregroundColor(.blue)
-                        }
-                    }
-                }
-                
-                // ABOUT section
-                Section(header: Text("profile.section.about".localized)) {
-                    NavigationLink {
-                        Text("Terms of Service")
-                    } label: {
-                        Text("profile.about.terms".localized)
-                    }
-                    
-                    NavigationLink {
-                        Text("Privacy Policy")
-                    } label: {
-                        Text("profile.about.privacy".localized)
-                    }
-                    
-                    HStack {
-                        Text("profile.about.version".localized)
-                        Spacer()
-                        Text("1.0.0")
-                            .foregroundColor(.gray)
-                    }
-                }
-            }
-            .navigationTitle("profile.title".localized)
-        }
-    }
-}
-
-struct LanguageSelectionView: View {
-    @EnvironmentObject private var localizationManager: LocalizationManager
-    @Environment(\.presentationMode) var presentationMode
-    
-    var body: some View {
-        List {
-            ForEach(Language.allCases) { language in
-                Button(action: {
-                    localizationManager.selectedLanguage = language
-                    presentationMode.wrappedValue.dismiss()
-                }) {
-                    HStack {
-                        Text(language.displayName)
-                        Spacer()
-                        if language == localizationManager.selectedLanguage {
-                            Image(systemName: "checkmark")
-                                .foregroundColor(.blue)
-                        }
-                    }
-                }
-                .foregroundColor(.primary)
-            }
-        }
-        .navigationTitle("profile.preferences.language".localized)
-        .navigationBarTitleDisplayMode(.inline)
-    }
-}
-
-struct CurrencySelectionView: View {
-    @EnvironmentObject private var localizationManager: LocalizationManager
-    @Environment(\.presentationMode) var presentationMode
-    
-    var body: some View {
-        List {
-            ForEach(Currency.allCases) { currency in
-                Button(action: {
-                    localizationManager.selectedCurrency = currency
-                    presentationMode.wrappedValue.dismiss()
-                }) {
-                    HStack {
-                        Text("\(currency.symbol) (\(currency.rawValue))")
-                        Spacer()
-                        if currency == localizationManager.selectedCurrency {
-                            Image(systemName: "checkmark")
-                                .foregroundColor(.blue)
-                        }
-                    }
-                }
-                .foregroundColor(.primary)
-            }
-        }
-        .navigationTitle("profile.preferences.currency".localized)
-        .navigationBarTitleDisplayMode(.inline)
-    }
 } 

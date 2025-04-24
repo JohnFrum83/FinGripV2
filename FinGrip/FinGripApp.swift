@@ -17,19 +17,6 @@ struct FinGripApp: App {
         UserDefaults.standard.set([languageCode], forKey: "AppleLanguages")
         UserDefaults.standard.set(languageCode, forKey: "AppleLocale")
         UserDefaults.standard.synchronize()
-        
-        // Load the Resources bundle and initialize localization
-        guard let resourcePath = Bundle.main.path(forResource: "Resources", ofType: "bundle"),
-              let resourceBundle = Bundle(path: resourcePath),
-              let languagePath = resourceBundle.path(forResource: languageCode, ofType: "lproj"),
-              let languageBundle = Bundle(path: languagePath) else {
-            print("⚠️ Failed to load language bundle for: \(languageCode)")
-            return
-        }
-        
-        // Force the bundle to be reloaded
-        let _ = languageBundle.localizedString(forKey: "app.name", value: nil, table: "Localizable")
-        print("✅ Successfully loaded language bundle for: \(languageCode)")
     }
     
     var body: some Scene {
@@ -37,6 +24,10 @@ struct FinGripApp: App {
             MainView()
                 .environment(\.locale, Locale(identifier: localizationManager.selectedLanguage.rawValue))
                 .environmentObject(localizationManager)
+                .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("LanguageChanged"))) { _ in
+                    // Force view refresh when language changes
+                    print("🔄 Refreshing views after language change")
+                }
         }
     }
 }

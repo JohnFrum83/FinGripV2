@@ -54,28 +54,28 @@ struct AddTransactionView: View {
         NavigationView {
             Form {
                 // Basic information section
-                Section(header: Text(LocalizationKey.transactionDetails.localized)) {
-                    TextField(LocalizationKey.transactionAmount.localized, text: $amount)
+                Section(header: Text(NSLocalizedString("transaction.details", comment: "Transaction details"))) {
+                    TextField(NSLocalizedString("transaction.amount", comment: "Transaction amount"), text: $amount)
                         .keyboardType(.decimalPad)
                     
-                    Picker(LocalizationKey.transactionType.localized, selection: $type) {
-                        Text(LocalizationKey.transactionIncome.localized).tag(TransactionType.income)
-                        Text(LocalizationKey.transactionExpense.localized).tag(TransactionType.expense)
+                    Picker(NSLocalizedString("transaction.type", comment: "Transaction type"), selection: $type) {
+                        Text(NSLocalizedString("transaction.income", comment: "Income")).tag(TransactionType.income)
+                        Text(NSLocalizedString("transaction.expense", comment: "Expense")).tag(TransactionType.expense)
                     }
                     .pickerStyle(.segmented)
                     
-                    Picker(LocalizationKey.transactionCategory.localized, selection: $category) {
+                    Picker(NSLocalizedString("transaction.category", comment: "Transaction category"), selection: $category) {
                         ForEach(categories, id: \.self) { category in
                             Text(category.rawValue.capitalized).tag(category)
                         }
                     }
                     
-                    TextField(LocalizationKey.transactionDescription.localized, text: $description)
-                    DatePicker(LocalizationKey.transactionDate.localized, selection: $date, displayedComponents: .date)
+                    TextField(NSLocalizedString("transaction.description", comment: "Transaction description"), text: $description)
+                    DatePicker(NSLocalizedString("transaction.date", comment: "Transaction date"), selection: $date, displayedComponents: .date)
                 }
                 
                 // Icon selection section
-                Section(header: Text(LocalizationKey.transactionIcon.localized)) {
+                Section(header: Text(NSLocalizedString("transaction.icon", comment: "Transaction icon"))) {
                     LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 5)) {
                         ForEach(availableIcons, id: \.self) { icon in
                             Image(systemName: icon)
@@ -93,16 +93,16 @@ struct AddTransactionView: View {
                     }
                 }
             }
-            .navigationTitle(LocalizationKey.transactionNew.localized)
+            .navigationTitle(NSLocalizedString("transaction.new", comment: "New transaction"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button(LocalizationKey.transactionCancel.localized) {
+                    Button(NSLocalizedString("transaction.cancel", comment: "Cancel")) {
                         dismiss()
                     }
                 }
                 ToolbarItem(placement: .confirmationAction) {
-                    Button(LocalizationKey.transactionSave.localized) {
+                    Button(NSLocalizedString("transaction.save", comment: "Save")) {
                         saveTransaction()
                     }
                     .disabled(!isFormValid)
@@ -116,11 +116,11 @@ struct AddTransactionView: View {
         guard let amountValue = Double(amount) else { return }
         
         let newTransaction = Transaction(
-            title: description,
-            amount: amountValue,
-            category: category,
             date: date,
-            type: type
+            amount: amountValue,
+            type: type,
+            category: category,
+            description: description
         )
         
         transactions.append(newTransaction)

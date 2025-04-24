@@ -1,22 +1,23 @@
 import SwiftUI
 
-/// A view that displays and manages the user's profile information.
-/// This view provides:
-/// - User account information
-/// - App preferences and settings
-/// - Help and support options
-/// - About app information
+/// A comprehensive view for managing user profile and application settings.
+/// This view provides a centralized interface for users to:
+/// - View and edit their account information
+/// - Manage app preferences including currency and theme
+/// - Configure notification settings
+/// - Set up security features
+/// - Access help and support resources
+/// - View app information and legal documents
 ///
-/// The view is organized into logical sections using SwiftUI's Form component,
-/// making it easy to navigate and manage different profile settings.
+/// The view is organized into logical sections using SwiftUI's List and Section components,
+/// making it easy to navigate and manage different aspects of the app.
 struct ProfileView: View {
-    @EnvironmentObject private var contentViewModel: ContentViewModel
-    @EnvironmentObject private var localizationManager: LocalizationManager
-    @AppStorage("selectedCurrency") private var selectedCurrency = Currency.usd.rawValue
+    @StateObject private var viewModel = ProfileViewModel()
+    @Environment(\.colorScheme) private var colorScheme
     
     var body: some View {
         NavigationView {
-            Form {
+            List {
                 accountSection
                 preferencesSection
                 notificationsSection
@@ -28,84 +29,79 @@ struct ProfileView: View {
         }
     }
     
+    /// Section displaying user account information and bank connections
     private var accountSection: some View {
-        Section(header: Text(LocalizationKey.profileAccount.localized)) {
-            HStack {
-                Text(LocalizationKey.profileName.localized)
-                Spacer()
-                Text(contentViewModel.userName)
-                    .foregroundColor(.secondary)
+        Section(header: Text(LocalizationKey.profileSectionAccount.localized)) {
+            NavigationLink(destination: AccountDetailsView()) {
+                Text(LocalizationKey.profileAccountDetails.localized)
             }
-            
-            HStack {
-                Text(LocalizationKey.profileEmail.localized)
-                Spacer()
-                Text(contentViewModel.userEmail)
-                    .foregroundColor(.secondary)
-            }
-            
-            NavigationLink(destination: LanguageSelectionView()) {
-                Text(LocalizationKey.profileLanguage.localized)
+            NavigationLink(destination: BankConnectionView()) {
+                Text(LocalizationKey.profileAccountBank.localized)
             }
         }
     }
     
+    /// Section for managing app preferences including currency and theme
     private var preferencesSection: some View {
-        Section(header: Text(LocalizationKey.profilePreferences.localized)) {
-            Picker(LocalizationKey.profileCurrency.localized, selection: $selectedCurrency) {
-                ForEach(Currency.allCases, id: \.self) { currency in
-                    Text(currency.rawValue).tag(currency.rawValue)
+        Section(header: Text(LocalizationKey.profileSectionPreferences.localized)) {
+            NavigationLink(destination: LanguageSettingsView()) {
+                Text(LocalizationKey.profilePreferencesLanguage.localized)
+            }
+            NavigationLink(destination: CurrencySettingsView()) {
+                Text(LocalizationKey.profilePreferencesCurrency.localized)
+            }
+            Toggle(LocalizationKey.profilePreferencesDarkMode.localized, isOn: $viewModel.isDarkMode)
+        }
+    }
+    
+    /// Section for configuring notification settings
+    private var notificationsSection: some View {
+        Section(header: Text(LocalizationKey.profileSectionNotifications.localized)) {
+            Toggle(LocalizationKey.profileNotificationsEnabled.localized, isOn: $viewModel.notificationsEnabled)
+            if viewModel.notificationsEnabled {
+                NavigationLink(destination: NotificationPreferencesView()) {
+                    Text(LocalizationKey.profileNotificationsPreferences.localized)
                 }
             }
         }
     }
     
-    private var notificationsSection: some View {
-        Section(header: Text(LocalizationKey.profileNotifications.localized)) {
-            Toggle(LocalizationKey.profileTransactionAlerts.localized, isOn: $contentViewModel.transactionAlertsEnabled)
-            Toggle(LocalizationKey.profileGoalReminders.localized, isOn: $contentViewModel.goalRemindersEnabled)
-        }
-    }
-    
+    /// Section for managing security features and privacy settings
     private var securitySection: some View {
-        Section(header: Text(LocalizationKey.profileSecurity.localized)) {
-            NavigationLink(destination: Text(LocalizationKey.profileChangePassword.localized)) {
-                Text(LocalizationKey.profileChangePassword.localized)
-            }
-            
-            NavigationLink(destination: Text(LocalizationKey.profileTwoFactorAuth.localized)) {
-                Text(LocalizationKey.profileTwoFactorAuth.localized)
+        Section(header: Text(LocalizationKey.profileSectionSecurity.localized)) {
+            Toggle(LocalizationKey.profileSecurityBiometric.localized, isOn: $viewModel.biometricEnabled)
+            NavigationLink(destination: PrivacySettingsView()) {
+                Text(LocalizationKey.profileSecurityPrivacy.localized)
             }
         }
     }
     
+    /// Section providing access to help and support resources
     private var helpSection: some View {
-        Section(header: Text(LocalizationKey.profileHelp.localized)) {
-            NavigationLink(destination: Text(LocalizationKey.profileFAQ.localized)) {
-                Text(LocalizationKey.profileFAQ.localized)
+        Section(header: Text(LocalizationKey.profileSectionHelp.localized)) {
+            NavigationLink(destination: FAQView()) {
+                Text(LocalizationKey.profileHelpFaq.localized)
             }
-            
-            NavigationLink(destination: Text(LocalizationKey.profileContactSupport.localized)) {
-                Text(LocalizationKey.profileContactSupport.localized)
+            NavigationLink(destination: SupportView()) {
+                Text(LocalizationKey.profileHelpSupport.localized)
             }
         }
     }
     
+    /// Section displaying app information and legal documents
     private var aboutSection: some View {
-        Section(header: Text(LocalizationKey.profileAbout.localized)) {
+        Section(header: Text(LocalizationKey.profileSectionAbout.localized)) {
+            NavigationLink(destination: TermsView()) {
+                Text(LocalizationKey.profileAboutTerms.localized)
+            }
+            NavigationLink(destination: PrivacyPolicyView()) {
+                Text(LocalizationKey.profileAboutPrivacy.localized)
+            }
             HStack {
-                Text(LocalizationKey.profileVersion.localized)
+                Text(LocalizationKey.profileAboutVersion.localized)
                 Spacer()
-                Text("1.0.0")
+                Text(viewModel.appVersion)
                     .foregroundColor(.secondary)
-            }
-            
-            NavigationLink(destination: Text(LocalizationKey.profilePrivacyPolicy.localized)) {
-                Text(LocalizationKey.profilePrivacyPolicy.localized)
-            }
-            
-            NavigationLink(destination: Text(LocalizationKey.profileTermsOfService.localized)) {
-                Text(LocalizationKey.profileTermsOfService.localized)
             }
         }
     }
@@ -114,6 +110,4 @@ struct ProfileView: View {
 /// Preview provider for ProfileView
 #Preview {
     ProfileView()
-        .environmentObject(ContentViewModel())
-        .environmentObject(LocalizationManager.shared)
 } 

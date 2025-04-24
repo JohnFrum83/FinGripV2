@@ -1,28 +1,44 @@
 import SwiftUI
 
-/// A view that displays and manages the user's financial goals.
-/// This view provides:
-/// - A list of all goals
-/// - Goal progress tracking
-/// - Ability to add new goals
-/// - Goal details and editing
-///
-/// The view uses a List to display goals and provides
-/// navigation to add new goals or view goal details.
+/// View for managing and tracking financial goals.
+/// This view allows users to:
+/// - View their current financial goals and progress
+/// - Add new goals from presets or custom ones
+/// - Track progress towards each goal
+/// - View goal details and update progress
 struct GoalsView: View {
-    @EnvironmentObject private var contentViewModel: ContentViewModel
-    @EnvironmentObject private var localizationManager: LocalizationManager
+    /// Access to the shared view model
+    @EnvironmentObject private var viewModel: ContentViewModel
+    
+    /// State for showing the goal selection sheet
     @State private var showingAddGoal = false
     
+    /// State for selected goals
+    @State private var selectedGoals: Set<Goal> = []
+    
+    private let columns = [
+        GridItem(.flexible()),
+        GridItem(.flexible())
+    ]
+    
     var body: some View {
-        NavigationView {
-            List {
-                ForEach(contentViewModel.goals) { goal in
-                    GoalRow(goal: goal)
+        NavigationStack {
+            ScrollView {
+                LazyVGrid(columns: columns, spacing: 16) {
+                    ForEach(viewModel.goals) { goal in
+                        GoalCard(goal: goal, isSelected: selectedGoals.contains(goal))
+                            .onTapGesture {
+                                if selectedGoals.contains(goal) {
+                                    selectedGoals.remove(goal)
+                                } else {
+                                    selectedGoals.insert(goal)
+                                }
+                            }
+                    }
                 }
-                .onDelete(perform: deleteGoals)
+                .padding()
             }
-            .navigationTitle(LocalizationKey.goalsTitle.localized)
+            .navigationTitle(NSLocalizedString("goals.title", comment: "Goals screen title"))
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
@@ -33,13 +49,53 @@ struct GoalsView: View {
                 }
             }
             .sheet(isPresented: $showingAddGoal) {
-                AddGoalView(goals: $contentViewModel.goals)
+                GoalSelectView(selectedGoals: $selectedGoals)
             }
         }
     }
+}
+
+struct GoalCard: View {
+    let goal: Goal
+    let isSelected: Bool
     
-    private func deleteGoals(at offsets: IndexSet) {
-        contentViewModel.goals.remove(atOffsets: offsets)
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            HStack {
+                Image(systemName: goal.icon)
+                    .font(.title2)
+                    .foregroundColor(goal.category.color)
+                Spacer()
+                if isSelected {
+                    Image(systemName: "checkmark.circle.fill")
+                        .foregroundColor(.blue)
+                }
+            }
+            
+            Text(goal.title)
+                .font(.headline)
+            
+            Text(goal.category.displayName)
+                .font(.subheadline)
+                .foregroundColor(.secondary)
+            
+            ProgressView(value: goal.progress)
+                .tint(goal.category.color)
+            
+            HStack {
+                Text("\(Int(goal.progress * 100))%")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+                Spacer()
+                Text(goal.deadline, style: .date)
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+            }
+        }
+        .padding()
+        .background(Color(.systemBackground))
+        .cornerRadius(12)
+        .shadow(radius: 2)
     }
 }
 
@@ -47,5 +103,4 @@ struct GoalsView: View {
 #Preview {
     GoalsView()
         .environmentObject(ContentViewModel())
-        .environmentObject(LocalizationManager.shared)
 } 

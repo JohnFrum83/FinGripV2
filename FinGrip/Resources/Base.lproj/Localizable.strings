@@ -1,0 +1,134 @@
+// General
+"app.name" = "FinGrip";
+
+// Common Actions
+"welcome" = "Welcome";
+"continue" = "Continue";
+"next" = "Next";
+"back" = "Back";
+"save" = "Save";
+"cancel" = "Cancel";
+"common.done" = "Done";
+"common.points" = "points";
+"points.format" = "%dpts";
+
+// Navigation
+"tab.home" = "Home";
+"tab.goals" = "Goals";
+"tab.transactions" = "Transactions";
+"tab.analytics" = "Analytics";
+"tab.profile" = "Profile";
+
+// Home Screen
+"home.title" = "Home";
+"home.total_balance" = "Total Balance";
+"home.income" = "Income";
+"home.expenses" = "Expenses";
+"home.active_challenges" = "Active Challenges";
+"home.quick_actions.score" = "View Score";
+"home.quick_actions.quick_win" = "Quick Win";
+
+// Profile
+"profile.title" = "Profile";
+"profile.section.account" = "Account";
+"profile.account.details" = "Account Details";
+"profile.account.bank" = "Bank Connection";
+"profile.section.preferences" = "Preferences";
+"profile.preferences.language" = "Language";
+"profile.preferences.currency" = "Currency";
+"profile.preferences.darkMode" = "Dark Mode";
+"profile.section.notifications" = "Notifications";
+"profile.notifications.enabled" = "Enable Notifications";
+"profile.notifications.preferences" = "Notification Preferences";
+"profile.section.security" = "Security";
+"profile.security.biometric" = "Biometric Authentication";
+
+// Settings
+"settings.title" = "Settings";
+"settings.language" = "Language";
+"settings.currency" = "Currency";
+"settings.appearance" = "Appearance";
+"settings.darkmode" = "Dark Mode";
+"settings.notifications" = "Notifications";
+"settings.notifications.enable" = "Enable Notifications";
+"settings.data" = "Data";
+"settings.data.export" = "Export Data";
+"settings.privacy_policy" = "Privacy Policy";
+"settings.privacy_policy.content" = "Our Privacy Policy explains how we collect, use, and protect your personal information.";
+"settings.terms_of_service" = "Terms of Service";
+"settings.terms_of_service.content" = "By using FinGrip, you agree to our Terms of Service which outline your rights and responsibilities.";
+
+// Onboarding
+"onboarding.welcome.title" = "Welcome to FinGrip";
+"onboarding.welcome.subtitle" = "Take control of your finances with smart tracking and insights";
+"button.get_started" = "Get Started";
+"button.complete" = "Complete Setup";
+"button.select_bank" = "Select Bank";
+
+// Transactions
+"transactions.title" = "Transactions";
+"transactions.filter.all" = "All";
+"transactions.filter.income" = "Income";
+"transactions.filter.expenses" = "Expenses";
+"transactions.summary.income" = "Total Income";
+"transactions.summary.expenses" = "Total Expenses";
+"transaction.new" = "New Transaction";
+"transaction.details" = "Transaction Details";
+"transaction.amount" = "Amount";
+
+// Analytics
+"analytics.total_spent" = "Total Spent";
+"analytics.income" = "Income";
+"analytics.expenses" = "Expenses";
+
+// Goals
+"goal.overdue" = "Overdue";
+"goal.days_left" = "%d days left";
+"goal.active" = "Active Goals";
+
+// Subscriptions
+"subscription.add.title" = "Add Subscription";
+"subscription.edit.title" = "Edit Subscription";
+"subscription.details.title" = "Subscription Details";
+"subscription.name" = "Name";
+"subscription.amount" = "Amount";
+"subscription.category.title" = "Category";
+"subscription.category" = "Category";
+"subscription.billing.title" = "Billing";
+"subscription.billing.cycle" = "Billing Cycle";
+"subscription.notes.title" = "Notes";
+
+// Subscription Categories
+"subscription.category.streaming" = "Streaming";
+"subscription.category.utilities" = "Utilities";
+"subscription.category.software" = "Software";
+"subscription.category.gaming" = "Gaming";
+"subscription.category.fitness" = "Fitness";
+"subscription.category.food" = "Food & Dining";
+"subscription.category.shopping" = "Shopping";
+"subscription.category.other" = "Other";
+
+// Billing Cycles
+"subscription.billing.weekly" = "Weekly";
+"subscription.billing.monthly" = "Monthly";
+"subscription.billing.quarterly" = "Quarterly";
+"subscription.billing.yearly" = "Yearly";
+
+// Quick Wins
+"quickwin.title" = "Quick Wins";
+"quickwin.subtitle" = "Complete these tasks to improve your finances";
+"quickwin.start_journey" = "Start My Journey";
+
+// Quick Win Tasks
+"quickwin.track_expenses.title" = "Track Daily Expenses";
+"quickwin.track_expenses.description" = "Record all expenses for one week";
+"quickwin.auto_savings.title" = "Set Up Auto-Savings";
+"quickwin.auto_savings.description" = "Automate your savings with scheduled transfers";
+"quickwin.credit_report.title" = "Review Credit Report";
+"quickwin.credit_report.description" = "Check your credit score and report";
+"quickwin.small_debt.title" = "Pay Off Smaller Debt";
+"quickwin.small_debt.description" = "Focus on paying off your smallest debt first";
+"quickwin.emergency_fund.title" = "Create Emergency Fund";
+"quickwin.emergency_fund.description" = "Start saving for unexpected expenses";
+"quickwin.subscription_costs.title" = "Cut Subscription Costs";
+"quickwin.subscription_costs.description" = "Review and cancel unused subscriptions"; 

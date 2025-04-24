@@ -6,50 +6,73 @@ struct Transaction: Identifiable, Codable {
     /// Unique identifier for the transaction
     let id: UUID
     
-    /// Title or description of the transaction
-    let title: String
+    /// Date when the transaction occurred
+    let date: Date
     
     /// Amount of the transaction
     let amount: Double
     
+    /// Type of the transaction (income, expense, or transfer)
+    let type: TransactionType
+    
     /// Category of the transaction
     let category: FinancialCategory
     
-    /// Date when the transaction occurred
-    let date: Date
+    /// Description of the transaction
+    let description: String
     
-    /// Type of the transaction (income or expense)
-    let type: TransactionType
+    /// Merchant associated with the transaction
+    let merchant: String?
+    
+    /// Location associated with the transaction
+    let location: String?
+    
+    /// Whether the transaction is recurring
+    let isRecurring: Bool
+    
+    /// Tags associated with the transaction
+    let tags: [String]
     
     /// Creates a new transaction
     /// - Parameters:
     ///   - id: Unique identifier (defaults to new UUID)
-    ///   - title: Title or description
-    ///   - amount: Transaction amount
-    ///   - category: Transaction category
     ///   - date: Transaction date
+    ///   - amount: Transaction amount
     ///   - type: Transaction type
+    ///   - category: Transaction category
+    ///   - description: Transaction description
+    ///   - merchant: Merchant associated with the transaction
+    ///   - location: Location associated with the transaction
+    ///   - isRecurring: Whether the transaction is recurring
+    ///   - tags: Tags associated with the transaction
     init(
         id: UUID = UUID(),
-        title: String,
+        date: Date,
         amount: Double,
+        type: TransactionType,
         category: FinancialCategory,
-        date: Date = Date(),
-        type: TransactionType
+        description: String,
+        merchant: String? = nil,
+        location: String? = nil,
+        isRecurring: Bool = false,
+        tags: [String] = []
     ) {
         self.id = id
-        self.title = title
-        self.amount = amount
-        self.category = category
         self.date = date
+        self.amount = amount
         self.type = type
+        self.category = category
+        self.description = description
+        self.merchant = merchant
+        self.location = location
+        self.isRecurring = isRecurring
+        self.tags = tags
     }
     
     /// Formatted date string for display
     var formattedDate: String {
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
-        formatter.timeStyle = .none
         return formatter.string(from: date)
     }
     
@@ -57,48 +80,69 @@ struct Transaction: Identifiable, Codable {
     var formattedAmount: String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .currency
-        formatter.currencyCode = "USD" // TODO: Use user's selected currency
+        formatter.currencyCode = LocalizationManager.shared.selectedCurrency.rawValue
         return formatter.string(from: NSNumber(value: amount)) ?? "\(amount)"
+    }
+    
+    /// Formatted month and year string for display
+    var monthYear: String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMMM yyyy"
+        return formatter.string(from: date)
     }
     
     // MARK: - Codable
     
     enum CodingKeys: String, CodingKey {
         case id
-        case title
-        case amount
-        case category
         case date
+        case amount
         case type
+        case category
+        case description
+        case merchant
+        case location
+        case isRecurring
+        case tags
     }
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = try container.decode(UUID.self, forKey: .id)
-        title = try container.decode(String.self, forKey: .title)
-        amount = try container.decode(Double.self, forKey: .amount)
-        category = try container.decode(FinancialCategory.self, forKey: .category)
         date = try container.decode(Date.self, forKey: .date)
+        amount = try container.decode(Double.self, forKey: .amount)
         type = try container.decode(TransactionType.self, forKey: .type)
+        category = try container.decode(FinancialCategory.self, forKey: .category)
+        description = try container.decode(String.self, forKey: .description)
+        merchant = try container.decode(String?.self, forKey: .merchant)
+        location = try container.decode(String?.self, forKey: .location)
+        isRecurring = try container.decode(Bool.self, forKey: .isRecurring)
+        tags = try container.decode([String].self, forKey: .tags)
     }
     
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(id, forKey: .id)
-        try container.encode(title, forKey: .title)
-        try container.encode(amount, forKey: .amount)
-        try container.encode(category, forKey: .category)
         try container.encode(date, forKey: .date)
+        try container.encode(amount, forKey: .amount)
         try container.encode(type, forKey: .type)
+        try container.encode(category, forKey: .category)
+        try container.encode(description, forKey: .description)
+        try container.encode(merchant, forKey: .merchant)
+        try container.encode(location, forKey: .location)
+        try container.encode(isRecurring, forKey: .isRecurring)
+        try container.encode(tags, forKey: .tags)
     }
     
     static var sample: Transaction {
         Transaction(
-            title: "Grocery Shopping",
-            amount: 45.67,
-            category: .spending,
             date: Date(),
-            type: .expense
+            amount: 45.67,
+            type: .expense,
+            category: .spending,
+            description: "Grocery Shopping",
+            merchant: "Whole Foods",
+            location: "123 Main St, Anytown, USA"
         )
     }
 }
@@ -106,8 +150,27 @@ struct Transaction: Identifiable, Codable {
 /// Represents the type of a transaction
 enum TransactionType: String, Codable, CaseIterable {
     /// Income transaction
-    case income
+    case income = "Income"
     
     /// Expense transaction
-    case expense
+    case expense = "Expense"
+    
+    /// Transfer transaction
+    case transfer = "Transfer"
+    
+    var color: Color {
+        switch self {
+        case .income: return .green
+        case .expense: return .red
+        case .transfer: return .blue
+        }
+    }
+    
+    var icon: String {
+        switch self {
+        case .income: return "arrow.down.circle.fill"
+        case .expense: return "arrow.up.circle.fill"
+        case .transfer: return "arrow.right.circle.fill"
+        }
+    }
 } 

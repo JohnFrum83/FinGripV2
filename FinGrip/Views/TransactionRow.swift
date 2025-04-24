@@ -28,7 +28,7 @@ struct TransactionRow: View {
             
             // Transaction details
             VStack(alignment: .leading, spacing: 4) {
-                Text(transaction.title)
+                Text(transaction.description)
                     .font(.headline)
                 
                 HStack {
@@ -57,14 +57,16 @@ struct TransactionRow: View {
 }
 
 /// Preview provider for TransactionRow
-#Preview {
-    TransactionRow(transaction: Transaction(
-        title: "Grocery Shopping",
-        amount: 150.0,
-        category: .spending,
-        date: Date(),
-        type: .expense
-    ))
-    .padding()
-    .previewLayout(.sizeThatFits)
+struct TransactionRow_Previews: PreviewProvider {
+    static var previews: some View {
+        TransactionRow(transaction: Transaction(
+            date: Date(),
+            amount: 45.67,
+            type: .expense,
+            category: .shopping,
+            description: "Grocery Shopping",
+            merchant: "Whole Foods",
+            location: "123 Main St, Anytown, USA"
+        ))
+    }
 } 

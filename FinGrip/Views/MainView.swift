@@ -21,6 +21,9 @@ struct MainView: View {
     /// Controls the animation state of the splash screen
     @State private var isSplashAnimating = false
     
+    /// Controls the visibility of the welcome screen
+    @State private var isWelcomeShown = true
+    
     @EnvironmentObject private var localizationManager: LocalizationManager
     
     var body: some View {
@@ -37,11 +40,14 @@ struct MainView: View {
                         }
                     }
             case .welcome:
-                WelcomeView(onGetStarted: {
-                    withAnimation {
-                        currentView = .onboarding
+                WelcomeView(isWelcomeShown: $isWelcomeShown)
+                    .onChange(of: isWelcomeShown) { _, newValue in
+                        if !newValue {
+                            withAnimation {
+                                currentView = .onboarding
+                            }
+                        }
                     }
-                })
             case .onboarding:
                 OnboardingView(onComplete: {
                     withAnimation {
