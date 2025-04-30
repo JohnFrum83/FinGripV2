@@ -65,7 +65,8 @@ class ContentViewModel: ObservableObject {
         goals = [
             Goal(title: "Emergency Fund", targetAmount: 5000, deadline: Date().addingTimeInterval(180*24*60*60), category: .savings, icon: "banknote"),
             Goal(title: "Pay off Credit Card", targetAmount: 2000, deadline: Date().addingTimeInterval(90*24*60*60), category: .debt, icon: "creditcard"),
-            Goal(title: "Vacation Savings", targetAmount: 3000, deadline: Date().addingTimeInterval(365*24*60*60), category: .savings, icon: "airplane")
+            Goal(title: "Vacation Savings", targetAmount: 3000, deadline: Date().addingTimeInterval(365*24*60*60), category: .savings, icon: "airplane"),
+            Goal(title: "Pay the Mortgage Faster", targetAmount: 150000, deadline: Date().addingTimeInterval(6*365*24*60*60), category: .debt, icon: "house.fill")
         ]
         
         // Sample transactions

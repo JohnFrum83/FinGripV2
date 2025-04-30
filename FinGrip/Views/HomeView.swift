@@ -63,12 +63,35 @@ struct HomeView: View {
     /// Balance card view showing total balance, income, and expenses
     private var balanceCard: some View {
         VStack(spacing: 15) {
-            Text("home.total_balance".localized)
-                .font(.subheadline)
-                .foregroundColor(.secondary)
-            
-            Text(balance.currencyFormatted())
-                .font(.system(size: 34, weight: .bold))
+            HStack(alignment: .center, spacing: 20) {
+                // Balance Section
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("home.total_balance".localized)
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                    
+                    Text(balance.currencyFormatted())
+                        .font(.system(size: 34, weight: .bold))
+                }
+                
+                Spacer()
+                
+                // Score Section with Trend
+                AnimatedScoreView(score: viewModel.healthScore.overallScore, size: 60, showLabel: false)
+                    .overlay(
+                        // Trend Indicator
+                        Image(systemName: viewModel.healthScore.trend > 0 ? "arrow.up.right" : "arrow.down.right")
+                            .foregroundColor(viewModel.healthScore.trend > 0 ? .green : .red)
+                            .font(.caption)
+                            .padding(6)
+                            .background(.ultraThinMaterial)
+                            .clipShape(Circle())
+                            .offset(x: 20, y: -20)
+                    )
+                    .onTapGesture {
+                        showingScoreDetails = true
+                    }
+            }
             
             HStack(spacing: 40) {
                 VStack {

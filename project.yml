@@ -4,6 +4,10 @@ options:
   deploymentTarget:
     iOS: 17.0
   useBaseInternationalization: true
+packages:
+  TinkLink:
+    url: https://github.com/tink-ab/tink-link-ios.git
+    version: 4.0.0
 targets:
   FinGrip:
     type: application
@@ -18,17 +22,27 @@ targets:
           - "**/.DS_Store"
     settings:
       base:
+        ENABLE_BITCODE: NO
+        IPHONEOS_DEPLOYMENT_TARGET: "17.0"
         INFOPLIST_FILE: FinGrip/Info.plist
         PRODUCT_BUNDLE_IDENTIFIER: com.fingrip.app
         DEVELOPMENT_ASSET_PATHS: ["FinGrip/Preview Content"]
-        CODE_SIGN_STYLE: Manual
-        CODE_SIGN_IDENTITY: ""
-        CODE_SIGNING_REQUIRED: NO
-        CODE_SIGNING_ALLOWED: NO
+        CODE_SIGN_STYLE: Automatic
+        CODE_SIGN_IDENTITY: "Apple Development"
+        CODE_SIGN_IDENTITY[sdk=iphoneos*]: "Apple Development"
+        PROVISIONING_PROFILE_SPECIFIER: ""
+        CODE_SIGNING_REQUIRED: YES
+        CODE_SIGNING_ALLOWED: YES
         SWIFT_VERSION: 5.0
         ENABLE_TESTABILITY: YES
-        DEVELOPMENT_TEAM: ""
+        DEVELOPMENT_TEAM: 24W42TW64G
         CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED: YES
+        EMBEDDED_CONTENT_CONTAINS_SWIFT: YES
+        ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES: YES
+    dependencies:
+      - package: TinkLink
+        product: TinkLink
+        type: framework
     info:
       path: FinGrip/Info.plist
       properties:
@@ -39,6 +53,11 @@ targets:
           - en
           - pl
         CFBundleDevelopmentRegion: en
+        CFBundleURLTypes:
+          - CFBundleURLSchemes:
+              - fingrip
+          - CFBundleTypeRole: Editor
+          - CFBundleURLName: com.fingrip.app
     resources:
       - path: FinGrip/Resources
         type: group

@@ -17,14 +17,14 @@ struct GoalsView: View {
     @State private var selectedGoals: Set<Goal> = []
     
     private let columns = [
-        GridItem(.flexible()),
-        GridItem(.flexible())
+        GridItem(.flexible(), spacing: 8),
+        GridItem(.flexible(), spacing: 8)
     ]
     
     var body: some View {
         NavigationStack {
             ScrollView {
-                LazyVGrid(columns: columns, spacing: 16) {
+                LazyVGrid(columns: columns, spacing: 8) {
                     ForEach(viewModel.goals) { goal in
                         GoalCard(goal: goal, isSelected: selectedGoals.contains(goal))
                             .onTapGesture {
@@ -36,9 +36,9 @@ struct GoalsView: View {
                             }
                     }
                 }
-                .padding()
+                .padding(.horizontal, 8)
             }
-            .navigationTitle(NSLocalizedString("goals.title", comment: "Goals screen title"))
+            .navigationTitle("goals.title".localized)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
@@ -60,42 +60,54 @@ struct GoalCard: View {
     let isSelected: Bool
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            HStack {
+        VStack(alignment: .leading, spacing: 6) {
+            HStack(alignment: .top, spacing: 8) {
                 Image(systemName: goal.icon)
-                    .font(.title2)
+                    .font(.title3)
                     .foregroundColor(goal.category.color)
-                Spacer()
-                if isSelected {
-                    Image(systemName: "checkmark.circle.fill")
-                        .foregroundColor(.blue)
-                }
+                    .frame(width: 20)
+                
+                Text(goal.title)
+                    .font(.callout.bold())
+                    .foregroundColor(.primary)
+                    .lineLimit(2)
+                    .multilineTextAlignment(.leading)
+                
+                Spacer(minLength: 4)
             }
             
-            Text(goal.title)
-                .font(.headline)
-            
             Text(goal.category.displayName)
-                .font(.subheadline)
+                .font(.footnote)
                 .foregroundColor(.secondary)
             
-            ProgressView(value: goal.progress)
-                .tint(goal.category.color)
+            Text(goal.deadline, style: .date)
+                .font(.caption)
+                .foregroundColor(.secondary)
             
-            HStack {
+            Spacer(minLength: 4)
+            
+            HStack(spacing: 8) {
+                ProgressView(value: goal.progress)
+                    .progressViewStyle(LinearProgressViewStyle())
+                    .tint(goal.category.color)
+                
                 Text("\(Int(goal.progress * 100))%")
                     .font(.caption)
                     .foregroundColor(.secondary)
-                Spacer()
-                Text(goal.deadline, style: .date)
-                    .font(.caption)
-                    .foregroundColor(.secondary)
+                    .frame(width: 35, alignment: .trailing)
             }
         }
-        .padding()
-        .background(Color(.systemBackground))
-        .cornerRadius(12)
-        .shadow(radius: 2)
+        .padding(10)
+        .frame(height: 120)
+        .background(
+            RoundedRectangle(cornerRadius: 12)
+                .fill(Color(.systemBackground))
+                .shadow(color: Color.black.opacity(0.1), radius: 8, x: 0, y: 2)
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: 12)
+                .stroke(isSelected ? Color.accentColor : Color.clear, lineWidth: 2)
+        )
     }
 }
 

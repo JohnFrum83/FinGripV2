@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		044B4D52D5A09F8CE19061B5 /* SavingsTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02EC7E39BA683F59964FBF1 /* SavingsTracker.swift */; };
 		0507D6A1A7CF2994CDBF4380 /* GoalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADBA65B77DC058656A8175F /* GoalsView.swift */; };
-		05DE9A8E96692481AA11F85F /* BankConnectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD9885199933724B7C7F50F /* BankConnectionView.swift */; };
 		06F98CA57D01BE0DD0A50D5A /* NotificationPreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2FAEF1934CD559DD100F6E /* NotificationPreferencesView.swift */; };
+		07EC0B6AE82E84D503AC5B95 /* TinkLink in Frameworks */ = {isa = PBXBuildFile; productRef = C5345707D1323B2DCFB8C863 /* TinkLink */; };
 		0A14B4C2CCF45FAF767061DD /* SupportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5C70183DAC45A895974F8B /* SupportView.swift */; };
 		0ADF7AF5ED028444459503E6 /* AddGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE7D506DDF954581223AC28 /* AddGoalView.swift */; };
 		0B2A5CB3883FA6E319D936EE /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7597FBF5524678108D156225 /* Goal.swift */; };
@@ -58,6 +58,7 @@
 		B9B8197C873632E55331198A /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2A6AB393D045F39F3237E7 /* SplashView.swift */; };
 		BA5D2923851B70394FEEF02C /* SavingOpportunity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95E10E90A0983A35B4AD501 /* SavingOpportunity.swift */; };
 		BD3BAF677A02546D8A13007B /* GoalRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E10EF651248AB949A4D3CF /* GoalRow.swift */; };
+		BED5D638974F44E827296643 /* TinkConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D8EE14145268A86CB3012C /* TinkConfiguration.swift */; };
 		BF0E4AB871BF62968D8A1FD4 /* BudgetPrediction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D768ADEFBF23A36403A3D26 /* BudgetPrediction.swift */; };
 		C548A2BF0EAB441D0A372947 /* PrivacySettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2C0DB790D859BDA3C51F5C /* PrivacySettingsView.swift */; };
 		C6BC23408C11B00EF23ECE66 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D476474ACA7E934D0A1331 /* ProfileViewModel.swift */; };
@@ -70,7 +71,9 @@
 		E30FAE181697E2366C390414 /* EditSubscriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F8731AF8C1D6628874D6D45 /* EditSubscriptionView.swift */; };
 		E613E65375E18D82B8356F57 /* AccountDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA2C74FD1309C0F7C22FF99 /* AccountDetailsView.swift */; };
 		ED677570CB1060E6BE3A9DFA /* SubscriptionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BFFDCD669D3D34E1C82198 /* SubscriptionListView.swift */; };
+		F3CBC8D5F7E406A893C0A146 /* BankConnectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA8D35D1FCF7263464A6E27 /* BankConnectionView.swift */; };
 		F3FE69F005F59171A6257854 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB621FFA8168ADFAC2563B6 /* WelcomeView.swift */; };
+		F58AD8412E5E79C080B3B471 /* TinkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6049A170572DEFC56460ED19 /* TinkService.swift */; };
 		FAAB228169ED2A0A859E44DD /* SubscriptionDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1ABB8D403DB0A89C2CA9D1 /* SubscriptionDetailView.swift */; };
 		FE3B4BA24708AD61275EDD22 /* QuickWinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC5CB7B17FACDE7A7FADC4C /* QuickWinView.swift */; };
 /* End PBXBuildFile section */
@@ -84,6 +87,7 @@
 		0E3670B0F56917CEEC7B54C7 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
 		0E5C70183DAC45A895974F8B /* SupportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportView.swift; sourceTree = "<group>"; };
 		0E6258118D0575E0A4287F1F /* FinancialScoreDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinancialScoreDetailsView.swift; sourceTree = "<group>"; };
+		0EA8D35D1FCF7263464A6E27 /* BankConnectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankConnectionView.swift; sourceTree = "<group>"; };
 		14E52B2AC4B3D576749B150F /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 		1D2A6AB393D045F39F3237E7 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		1D2FAEF1934CD559DD100F6E /* NotificationPreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPreferencesView.swift; sourceTree = "<group>"; };
@@ -94,6 +98,7 @@
 		2D7CEB830EB828523AA5701D /* FAQView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQView.swift; sourceTree = "<group>"; };
 		3CED2436D6546E4AB3D02304 /* SubscriptionFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionFormView.swift; sourceTree = "<group>"; };
 		40B91DD39ECCF07C056C8B2E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		41D8EE14145268A86CB3012C /* TinkConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TinkConfiguration.swift; sourceTree = "<group>"; };
 		4A1ABB8D403DB0A89C2CA9D1 /* SubscriptionDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionDetailView.swift; sourceTree = "<group>"; };
 		576BF99206161FCA527B9633 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		57B826E0042A9126216D78B7 /* TermsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsView.swift; sourceTree = "<group>"; };
@@ -101,6 +106,7 @@
 		5F1909AA5855FF4FFFAC4C2D /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		5FAD6E203A770B2CFBF08D8A /* LanguageSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageSettingsView.swift; sourceTree = "<group>"; };
 		5FFB9C985D11EB152E3EBBF5 /* Subscription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Subscription.swift; sourceTree = "<group>"; };
+		6049A170572DEFC56460ED19 /* TinkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TinkService.swift; sourceTree = "<group>"; };
 		63C63B7C4DE3E853545E2305 /* FinGripApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinGripApp.swift; sourceTree = "<group>"; };
 		6F3500F9B168D0ABA772AA36 /* SubscriptionRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionRow.swift; sourceTree = "<group>"; };
 		70660F460BD0377A8C809C0C /* CurrencySettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencySettingsView.swift; sourceTree = "<group>"; };
@@ -118,7 +124,6 @@
 		98704A20D7D517E270E3073D /* FinGrip.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = FinGrip.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A58093DE5BC6E5337F3E483 /* AddSubscriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSubscriptionView.swift; sourceTree = "<group>"; };
 		9AC296105D628406C66BD53C /* FinancialHealthScore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinancialHealthScore.swift; sourceTree = "<group>"; };
-		9BD9885199933724B7C7F50F /* BankConnectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankConnectionView.swift; sourceTree = "<group>"; };
 		9FBA5163597803E5EF60BFAC /* SavingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingsView.swift; sourceTree = "<group>"; };
 		A074A049EC3C8A3A627379F0 /* FinancialHealthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinancialHealthView.swift; sourceTree = "<group>"; };
 		A6D24FDEE1F08771E79D815C /* Recommendation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recommendation.swift; sourceTree = "<group>"; };
@@ -147,6 +152,17 @@
 		FD812B75CC5AF09AC8528740 /* PrivacyPolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFrameworksBuildPhase section */
+		638826012B4C5B37706EF733 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				07EC0B6AE82E84D503AC5B95 /* TinkLink in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
 /* Begin PBXGroup section */
 		00768D782B6571617D715F7E /* Managers */ = {
 			isa = PBXGroup;
@@ -172,6 +188,14 @@
 			);
 			sourceTree = "<group>";
 		};
+		5AD1A7E45FB0938BE226DE11 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				6049A170572DEFC56460ED19 /* TinkService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		5AE00979E952B0FFD63B6A0C /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -180,6 +204,7 @@
 				BC9DD9FC305F3927DE142E02 /* AddTransactionView.swift */,
 				EEA1D82E38E9B272CBC9F73F /* AnalyticsView.swift */,
 				E241AF0D456607FC7ABB45F6 /* AppView.swift */,
+				0EA8D35D1FCF7263464A6E27 /* BankConnectionView.swift */,
 				40B91DD39ECCF07C056C8B2E /* ContentView.swift */,
 				5E5ECA68953F8394C78B1459 /* DashboardTabView.swift */,
 				A074A049EC3C8A3A627379F0 /* FinancialHealthView.swift */,
@@ -219,6 +244,7 @@
 				C02EC7E39BA683F59964FBF1 /* SavingsTracker.swift */,
 				F031C54D7EAFD2F6B48DAFA7 /* SpendingCategory.swift */,
 				5FFB9C985D11EB152E3EBBF5 /* Subscription.swift */,
+				41D8EE14145268A86CB3012C /* TinkConfiguration.swift */,
 				0E3670B0F56917CEEC7B54C7 /* Transaction.swift */,
 			);
 			path = Models;
@@ -254,7 +280,6 @@
 				8FA2C74FD1309C0F7C22FF99 /* AccountDetailsView.swift */,
 				F5974741ED799DE66AF2FB8B /* AddSavingOpportunityView.swift */,
 				0D879420B073853B47183B92 /* AnimatedScoreView.swift */,
-				9BD9885199933724B7C7F50F /* BankConnectionView.swift */,
 				70660F460BD0377A8C809C0C /* CurrencySettingsView.swift */,
 				7F8731AF8C1D6628874D6D45 /* EditSubscriptionView.swift */,
 				2D7CEB830EB828523AA5701D /* FAQView.swift */,
@@ -290,6 +315,7 @@
 				00768D782B6571617D715F7E /* Managers */,
 				69F84F246BA23D192D9971C8 /* Models */,
 				78015B15D83FFADFAE4B1C2D /* Resources */,
+				5AD1A7E45FB0938BE226DE11 /* Services */,
 				086D71843D726D30699826E9 /* Utilities */,
 				838F8DEB66258C16872C44B1 /* Utils */,
 				D3EEA7564A2AD8F33F4470DD /* ViewModels */,
@@ -318,12 +344,16 @@
 			buildPhases = (
 				57E37EA41AB21C8046EE04A2 /* Sources */,
 				9D9391EDA8D1C775E512C3DC /* Resources */,
+				638826012B4C5B37706EF733 /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = FinGrip;
+			packageProductDependencies = (
+				C5345707D1323B2DCFB8C863 /* TinkLink */,
+			);
 			productName = FinGrip;
 			productReference = 98704A20D7D517E270E3073D /* FinGrip.app */;
 			productType = "com.apple.product-type.application";
@@ -338,8 +368,8 @@
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
 					391474A3B0FC665114735EE0 = {
-						DevelopmentTeam = "";
-						ProvisioningStyle = Manual;
+						DevelopmentTeam = 24W42TW64G;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -353,6 +383,11 @@
 				pl,
 			);
 			mainGroup = 580092A073085FC7C5E3B5B9;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				D3E0DBC0A71F97B623B3C079 /* XCRemoteSwiftPackageReference "tink-link-ios" */,
+			);
+			preferredProjectObjectVersion = 54;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -385,7 +420,7 @@
 				3D28AB04BE3A532F9987029A /* AnalyticsView.swift in Sources */,
 				B5C06535AA0784F018F338D4 /* AnimatedScoreView.swift in Sources */,
 				66DD9D3ED0DD5C3E78EB8980 /* AppView.swift in Sources */,
-				05DE9A8E96692481AA11F85F /* BankConnectionView.swift in Sources */,
+				F3CBC8D5F7E406A893C0A146 /* BankConnectionView.swift in Sources */,
 				BF0E4AB871BF62968D8A1FD4 /* BudgetPrediction.swift in Sources */,
 				82DBF4B2C1C3DF0211791AF2 /* Challenge.swift in Sources */,
 				0F1C914AD538660FCA0DD33C /* ContentView.swift in Sources */,
@@ -438,6 +473,8 @@
 				0A14B4C2CCF45FAF767061DD /* SupportView.swift in Sources */,
 				A210D1539E9ADC6ED5794EC0 /* SyncBankView.swift in Sources */,
 				DCE37CC9AEF760EE2E42A5E8 /* TermsView.swift in Sources */,
+				BED5D638974F44E827296643 /* TinkConfiguration.swift in Sources */,
+				F58AD8412E5E79C080B3B471 /* TinkService.swift in Sources */,
 				D93E45596BD041EE4F02B4CD /* Transaction.swift in Sources */,
 				B50ADA5F5FC4AFDCFA9E6245 /* TransactionRow.swift in Sources */,
 				52549804EF8B3944A4B87C6B /* TransactionsView.swift in Sources */,
@@ -464,23 +501,29 @@
 		0A9917EA75531C1AC9747502 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
-				CODE_SIGNING_ALLOWED = NO;
-				CODE_SIGNING_REQUIRED = NO;
-				CODE_SIGN_IDENTITY = "";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGNING_ALLOWED = YES;
+				CODE_SIGNING_REQUIRED = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = (
 					"FinGrip/Preview Content",
 				);
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 24W42TW64G;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				ENABLE_BITCODE = NO;
 				ENABLE_TESTABILITY = YES;
 				INFOPLIST_FILE = FinGrip/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.fingrip.app;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -490,23 +533,29 @@
 		34704A4F9C9F933FBEA73DC5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
-				CODE_SIGNING_ALLOWED = NO;
-				CODE_SIGNING_REQUIRED = NO;
-				CODE_SIGN_IDENTITY = "";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGNING_ALLOWED = YES;
+				CODE_SIGNING_REQUIRED = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = (
 					"FinGrip/Preview Content",
 				);
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 24W42TW64G;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				ENABLE_BITCODE = NO;
 				ENABLE_TESTABILITY = YES;
 				INFOPLIST_FILE = FinGrip/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.fingrip.app;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -654,6 +703,25 @@
 			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D3E0DBC0A71F97B623B3C079 /* XCRemoteSwiftPackageReference "tink-link-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/tink-ab/tink-link-ios.git";
+			requirement = {
+				kind = exactVersion;
+				version = 4.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C5345707D1323B2DCFB8C863 /* TinkLink */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D3E0DBC0A71F97B623B3C079 /* XCRemoteSwiftPackageReference "tink-link-ios" */;
+			productName = TinkLink;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 6EA796A93B6D3C9F2ACAA410 /* Project object */;
 }

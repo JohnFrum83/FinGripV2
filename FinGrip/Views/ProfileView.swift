@@ -14,6 +14,7 @@ import SwiftUI
 struct ProfileView: View {
     @StateObject private var viewModel = ProfileViewModel()
     @Environment(\.colorScheme) private var colorScheme
+    @State private var navigationPath = NavigationPath()
     
     var body: some View {
         NavigationView {
@@ -35,7 +36,7 @@ struct ProfileView: View {
             NavigationLink(destination: AccountDetailsView()) {
                 Text(LocalizationKey.profileAccountDetails.localized)
             }
-            NavigationLink(destination: BankConnectionView()) {
+            NavigationLink(destination: SyncBankView(navigationPath: $navigationPath)) {
                 Text(LocalizationKey.profileAccountBank.localized)
             }
         }

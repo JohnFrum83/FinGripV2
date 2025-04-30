@@ -1,9 +1,20 @@
 import SwiftUI
+import SafariServices
 
 struct Bank: Identifiable, Hashable {
     let id = UUID()
     let name: String
     let icon: String
+}
+
+struct SafariView: UIViewControllerRepresentable {
+    let url: URL
+    
+    func makeUIViewController(context: Context) -> SFSafariViewController {
+        return SFSafariViewController(url: url)
+    }
+    
+    func updateUIViewController(_ uiViewController: SFSafariViewController, context: Context) {}
 }
 
 // Custom animated counter modifier
@@ -25,10 +36,16 @@ struct CountingModifier: AnimatableModifier {
 
 struct SyncBankView: View {
     @Binding var navigationPath: NavigationPath
+    @StateObject private var tinkService = TinkService.shared
+    @EnvironmentObject private var contentViewModel: ContentViewModel
+    @State private var isShowingSafari = false
     @State private var isConnected = false
     @State private var healthScore = 754
     @State private var animatedScore: Double = 0
     @State private var isAnimating = false
+    @State private var fetchedAccounts: [TinkAccount] = []
+    @State private var showError = false
+    @State private var errorMessage = ""
     
     var body: some View {
         VStack(spacing: 20) {
@@ -51,16 +68,7 @@ struct SyncBankView: View {
                     .padding()
                 
                 VStack(spacing: 16) {
-                    Button(action: {
-                        isConnected = true
-                        // Start the animation after a brief delay
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                            withAnimation(.easeOut(duration: 1.0)) {
-                                animatedScore = Double(healthScore)
-                                isAnimating = true
-                            }
-                        }
-                    }) {
+                    Button(action: openTinkLink) {
                         Text("Connect Bank")
                             .font(.headline)
                             .foregroundColor(.white)
@@ -145,6 +153,22 @@ struct SyncBankView: View {
                         .opacity(isAnimating ? 1 : 0)
                         .animation(.easeIn.delay(2.0), value: isAnimating)
                     
+                    if !fetchedAccounts.isEmpty {
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text("Connected Accounts:")
+                                .font(.headline)
+                            ForEach(fetchedAccounts) { account in
+                                HStack {
+                                    Text(account.name)
+                                    Spacer()
+                                    Text("\(account.balance, specifier: "%.2f") \(account.currencyCode)")
+                                        .foregroundColor(.secondary)
+                                }
+                            }
+                        }
+                        .padding()
+                    }
+                    
                     Button(action: {
                         navigationPath.append("scoreDetails")
                     }) {
@@ -167,6 +191,54 @@ struct SyncBankView: View {
         }
         .navigationBarTitleDisplayMode(.inline)
         .animation(.default, value: isConnected)
+        .alert("Error", isPresented: $showError) {
+            Button("OK", role: .cancel) { }
+        } message: {
+            Text(errorMessage)
+        }
+        .onOpenURL { url in
+            Task {
+                do {
+                    try tinkService.handleCallback(url)
+                    if case .authenticated = tinkService.authState {
+                        isConnected = true
+                        do {
+                            let accounts = try await tinkService.fetchAccounts()
+                            fetchedAccounts = accounts
+                            // Send accounts to ContentViewModel
+                            contentViewModel.currentBalance = accounts.reduce(0) { $0 + $1.balance }
+                            // Fetch transactions and send to ContentViewModel
+                            let transactions = try await tinkService.fetchTransactions()
+                            contentViewModel.transactions = transactions
+                            
+                            // Start the animation after a brief delay
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                withAnimation(.easeOut(duration: 2.0)) {
+                                    animatedScore = Double(healthScore)
+                                    isAnimating = true
+                                }
+                            }
+                        } catch {
+                            showError = true
+                            errorMessage = error.localizedDescription
+                        }
+                    }
+                } catch {
+                    showError = true
+                    errorMessage = error.localizedDescription
+                }
+            }
+        }
+    }
+    
+    private func openTinkLink() {
+        do {
+            let url = try tinkService.getAuthorizationUrl()
+            UIApplication.shared.open(url)
+        } catch {
+            showError = true
+            errorMessage = error.localizedDescription
+        }
     }
 }
 
@@ -174,4 +246,5 @@ struct SyncBankView: View {
     NavigationStack {
         SyncBankView(navigationPath: .constant(NavigationPath()))
     }
+} 
 } 

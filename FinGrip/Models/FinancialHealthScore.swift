@@ -7,6 +7,7 @@ struct FinancialHealthScore: Codable {
     var components: [ScoreComponent]
     var categoryScores: [Category: Double]
     var savingsRatio: Double
+    var trend: Double
     var recommendations: [FinGripRecommendation]
     
     init(date: Date = Date(), components: [ScoreComponent] = []) {
@@ -15,6 +16,7 @@ struct FinancialHealthScore: Codable {
         self.overallScore = Self.calculateOverallScore(from: components)
         self.categoryScores = Dictionary(uniqueKeysWithValues: components.map { ($0.category, $0.score) })
         self.savingsRatio = 0.0
+        self.trend = 0.0
         self.recommendations = []
     }
     
@@ -80,5 +82,37 @@ struct FinancialHealthScore: Codable {
         case 70..<85: return "Good"
         default: return "Excellent"
         }
+    }
+    
+    /// Initialize with default values for testing
+    static var preview: FinancialHealthScore {
+        var score = FinancialHealthScore(
+            date: Date(),
+            components: [
+                ScoreComponent(
+                    category: .savings,
+                    score: 80.0,
+                    details: "Good savings habits with regular deposits"
+                ),
+                ScoreComponent(
+                    category: .spending,
+                    score: 70.0,
+                    details: "Moderate control over discretionary spending"
+                )
+            ]
+        )
+        score.overallScore = 75.0
+        score.savingsRatio = 0.2
+        score.trend = 5.5
+        score.recommendations = [
+            FinGripRecommendation(
+                title: "Increase Emergency Fund",
+                description: "Build up your emergency fund to cover 6 months of expenses",
+                type: .saving,
+                priority: .high,
+                impact: .significant
+            )
+        ]
+        return score
     }
 }

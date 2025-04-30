@@ -3,6 +3,7 @@ import SwiftUI
 @main
 struct FinGripApp: App {
     @StateObject private var localizationManager = LocalizationManager.shared
+    @StateObject private var tinkService = TinkService.shared
     
     init() {
         // Set initial language if not already set
@@ -24,6 +25,16 @@ struct FinGripApp: App {
             MainView()
                 .environment(\.locale, Locale(identifier: localizationManager.selectedLanguage.rawValue))
                 .environmentObject(localizationManager)
+                .environmentObject(tinkService)
+                .onOpenURL { url in
+                    if url.scheme == "fingrip" {
+                        do {
+                            try await tinkService.handleCallback(url)
+                        } catch {
+                            print("Error handling callback: \(error)")
+                        }
+                    }
+                }
                 .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("LanguageChanged"))) { _ in
                     // Force view refresh when language changes
                     print("🔄 Refreshing views after language change")

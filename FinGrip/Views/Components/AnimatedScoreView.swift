@@ -9,38 +9,44 @@ struct AnimatedScoreView: View {
         score / 100.0
     }
     
-    private var scoreColor: Color {
-        switch score {
-        case 0..<40: return .red
-        case 40..<70: return .orange
-        case 70..<90: return .yellow
-        default: return .green
-        }
-    }
+    private let gradient = AngularGradient(
+        stops: [
+            .init(color: .red, location: 0.0),
+            .init(color: .orange, location: 0.33),
+            .init(color: .yellow, location: 0.66),
+            .init(color: .green, location: 1.0)
+        ],
+        center: .center,
+        startAngle: .degrees(0),
+        endAngle: .degrees(360)
+    )
     
     var body: some View {
         ZStack {
             Circle()
-                .stroke(lineWidth: 20)
-                .opacity(0.2)
-                .foregroundColor(scoreColor)
+                .stroke(lineWidth: 8)
+                .opacity(0.1)
+                .foregroundColor(.gray)
             
             Circle()
                 .trim(from: 0.0, to: CGFloat(min(progress, 1.0)))
-                .stroke(style: StrokeStyle(lineWidth: 20, lineCap: .round, lineJoin: .round))
-                .foregroundColor(scoreColor)
-                .rotationEffect(Angle(degrees: 270.0))
+                .stroke(style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
+                .fill(gradient)
+                .rotationEffect(.degrees(-90))
                 .animation(.easeInOut(duration: 1.0), value: progress)
                 .accessibilityLabel("Score progress: \(Int(score)) percent")
             
             if showLabel {
                 VStack(spacing: 4) {
                     Text("\(Int(score))")
-                        .font(.system(size: size * 0.25, weight: .bold, design: .rounded))
-                    Text("Score")
-                        .font(.system(size: size * 0.12, weight: .medium, design: .rounded))
+                        .font(.system(size: size * 0.3, weight: .bold, design: .rounded))
+                    Text("Financial Score")
+                        .font(.system(size: size * 0.11, weight: .medium, design: .rounded))
                         .foregroundColor(.secondary)
                 }
+            } else {
+                Text("\(Int(score))")
+                    .font(.system(size: size * 0.25, weight: .bold, design: .rounded))
             }
         }
         .frame(width: size, height: size)
