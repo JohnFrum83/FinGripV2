@@ -17,15 +17,7 @@ struct TinkConfiguration {
     
     /// Test mode flag
     static let isTestMode = false
-    
-    /// Get the TinkLink configuration
-    static var tinkLinkConfig: Configuration {
-        Configuration(
-            clientID: clientID,
-            redirectURI: redirectURI,
-            baseDomain: .eu
-        )
-    }
+    static let testMode = isTestMode
     
     /// Get the scopes array for authorization
     static var scopesList: [String] {
@@ -62,14 +54,6 @@ struct TinkConfiguration {
             "TRANSFER_DESTINATIONS"
         ]
     }
-}
-
-/// Represents the authentication state for Tink
-enum TinkAuthState {
-    case notAuthenticated
-    case authenticating
-    case authenticated(code: String)
-    case error(Error)
 }
 
 /// Custom error types for Tink operations

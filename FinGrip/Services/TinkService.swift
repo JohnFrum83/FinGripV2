@@ -22,77 +22,40 @@ class TinkService: ObservableObject {
     
     private let tokenKey = "TinkAccessToken"
     
-    private var configuration: Configuration
+    private init() {}
     
-    private init() {
-        self.configuration = TinkConfiguration.tinkLinkConfig
+    // MARK: - Authentication
+    /// TODO: Implement authentication using TinkLink v4+ async/await API
+    func authenticate() async throws -> String {
+        // Placeholder: Simulate successful authentication and return a dummy code
+        try await Task.sleep(nanoseconds: 1_000_000_000) // Simulate network delay
+        return "dummy-auth-code"
     }
     
-    func initializeTink() {
-        // Initialize with base configuration
-        configuration = TinkConfiguration.tinkLinkConfig
-        
-        // Set additional configuration options
-        configuration.locale = TinkConfiguration.locale
-        configuration.market = TinkConfiguration.market
-        configuration.isTest = TinkConfiguration.isTestMode
+    /// Allows external code to update the authentication state safely
+    func setAuthState(_ newState: TinkAuthenticationState) {
+        self.authState = newState
     }
     
-    /// Generates the authorization URL for Tink Link
-    func getAuthorizationUrl() throws -> URL {
-        let tinkLinkConfig = TinkLinkConfiguration(
-            clientId: configuration.clientId,
-            redirectUri: configuration.redirectUri,
-            baseDomain: configuration.baseDomain
-        )
-        
-        return try TinkLink.accountAggregation.addCredentials(
-            configuration: tinkLinkConfig,
-            market: configuration.market,
-            authorizationCode: nil,
-            locale: configuration.locale,
-            scope: [.transactions(.read), .accounts(.read)],
-            sessionId: UUID().uuidString,
-            inputUsername: nil,
-            inputProvider: nil
-        ) { [weak self] result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let code):
-                    self?.authState = .authenticated(code: code)
-                case .failure(let error):
-                    self?.authState = .error(error)
-                }
-            }
-        }
+    /// TODO: Implement callback handler using TinkLink v4+ async/await API
+    func handleCallback(_ url: URL) async throws {
+        // Use TinkLink async/await methods here
     }
     
-    /// Handles the callback from Tink authentication
-    /// - Parameter url: The callback URL containing the authorization code
-    func handleCallback(_ url: URL) throws {
-        guard url.scheme == "fingrip" else {
-            throw TinkError.invalidConfiguration("Invalid URL scheme")
-        }
-        
-        let tinkLinkConfig = TinkLinkConfiguration(
-            clientId: configuration.clientId,
-            redirectUri: configuration.redirectUri,
-            baseDomain: configuration.baseDomain
-        )
-        
-        try TinkLink.handleCallback(configuration: tinkLinkConfig, url: url) { [weak self] result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let code):
-                    self?.authState = .authenticated(code: code)
-                case .failure(let error):
-                    self?.authState = .error(error)
-                }
-            }
-        }
+    // MARK: - Data Fetching
+    /// TODO: Implement account fetching using TinkLink v4+ async/await API
+    func fetchAccounts() async throws -> [TinkAccount] {
+        // Use TinkLink async/await methods here
+        return []
     }
     
-    /// Securely store/retrieve tokens (placeholder for Keychain)
+    /// TODO: Implement transaction fetching using TinkLink v4+ async/await API
+    func fetchTransactions() async throws -> [Transaction] {
+        // Use TinkLink async/await methods here
+        return []
+    }
+    
+    // MARK: - Keychain Helper
     private func storeToken(_ token: String) {
         KeychainHelper.save(token, service: "com.fingrip.tink", account: tokenKey)
         self.accessToken = token
@@ -106,101 +69,12 @@ class TinkService: ObservableObject {
         return nil
     }
     
-    /// Modularized token exchange with error logging
-    func exchangeCodeForTokenModular(_ code: String) async -> Result<String, Error> {
-        do {
-            let token = try await TinkLink.exchangeAuthorizationCode(code)
-            storeToken(token)
-            return .success(token)
-        } catch {
-            logger.error("Token exchange failed: \(error.localizedDescription)")
-            return .failure(error)
-        }
-    }
-    
-    /// Fetches user accounts from Tink
-    func fetchAccounts() async throws -> [TinkAccount] {
-        guard let accessToken = accessToken else {
-            throw TinkError.authenticationFailed
-        }
-        
-        let client = TinkLinkClient(accessToken: accessToken)
-        return try await client.fetchAccounts()
-    }
-    
-    /// Fetches user transactions from Tink
-    func fetchTransactions() async throws -> [Transaction] {
-        guard let accessToken = accessToken else {
-            throw TinkError.authenticationFailed
-        }
-        
-        let client = TinkLinkClient(accessToken: accessToken)
-        let tinkTransactions = try await client.fetchTransactions()
-        
-        return tinkTransactions.map { tinkTx in
-            Transaction(
-                date: tinkTx.date,
-                amount: tinkTx.amount.value,
-                type: tinkTx.amount.value >= 0 ? .income : .expense,
-                category: .spending, // Map to your categories as needed
-                description: tinkTx.description,
-                merchant: tinkTx.merchantName,
-                location: nil,
-                isRecurring: false,
-                tags: []
-            )
-        }
-    }
-    
-    func fetchUserData(accessToken: String) async throws -> [String: Any] {
-        // Initialize Tink client with access token
-        let headers = ["Authorization": "Bearer \(accessToken)"]
-        
-        guard let url = URL(string: "https://api.tink.com/api/v1/user") else {
-            throw TinkError.invalidConfiguration
-        }
-        
-        var request = URLRequest(url: url)
-        request.httpMethod = "GET"
-        request.allHTTPHeaderFields = headers
-        
-        let (data, response) = try await URLSession.shared.data(for: request)
-        
-        guard let httpResponse = response as? HTTPURLResponse,
-              httpResponse.statusCode == 200 else {
-            throw TinkError.invalidResponse
-        }
-        
-        guard let json = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
-            throw TinkError.invalidResponse
-        }
-        
-        return json
-    }
-    
-    func fetchTransactions(accessToken: String) async throws -> [String: Any] {
-        let headers = ["Authorization": "Bearer \(accessToken)"]
-        
-        guard let url = URL(string: "https://api.tink.com/data/v2/transactions") else {
-            throw TinkError.invalidConfiguration
-        }
-        
-        var request = URLRequest(url: url)
-        request.httpMethod = "GET"
-        request.allHTTPHeaderFields = headers
-        
-        let (data, response) = try await URLSession.shared.data(for: request)
-        
-        guard let httpResponse = response as? HTTPURLResponse,
-              httpResponse.statusCode == 200 else {
-            throw TinkError.invalidResponse
-        }
-        
-        guard let json = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
-            throw TinkError.invalidResponse
-        }
-        
-        return json
+    // Add a method to provide TinkLink.Configuration
+    func makeTinkLinkConfiguration() -> TinkLink.Configuration {
+        TinkLink.Configuration(
+            clientID: TinkConfiguration.clientID,
+            redirectURI: TinkConfiguration.redirectURI
+        )
     }
 }
 
@@ -254,4 +128,27 @@ struct KeychainHelper {
         }
         return nil
     }
-} 
+}
+
+// Add at the top, before the TinkService class
+enum TinkAuthenticationState: Equatable {
+    case notAuthenticated
+    case authenticated(code: String)
+    case error(Error)
+
+    static func == (lhs: TinkAuthenticationState, rhs: TinkAuthenticationState) -> Bool {
+        switch (lhs, rhs) {
+        case (.notAuthenticated, .notAuthenticated):
+            return true
+        case let (.authenticated(code1), .authenticated(code2)):
+            return code1 == code2
+        case let (.error(err1), .error(err2)):
+            return String(describing: err1) == String(describing: err2)
+        default:
+            return false
+        }
+    }
+}
+
+// Find the TinkConfiguration struct/class and add this property if missing
+// static var testMode: Bool = false 

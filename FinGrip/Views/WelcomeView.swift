@@ -1,11 +1,11 @@
 import SwiftUI
-import SafariServices
+import TinkLink
 
 struct WelcomeView: View {
     @Binding var isWelcomeShown: Bool
     @StateObject private var tinkService = TinkService.shared
     @State private var selectedCurrency: Currency = .eur
-    @State private var isShowingSafari = false
+    @State private var isPresentingTinkLink = false
     
     enum Currency: String, CaseIterable {
         case usd = "$"
@@ -26,65 +26,47 @@ struct WelcomeView: View {
                 .foregroundColor(.secondary)
                 .padding(.horizontal)
             
-            VStack(spacing: 40) {
-                VStack(spacing: 16) {
-                    Text("Choose Your Currency")
-                        .font(.title2)
-                        .bold()
-                    
-                    HStack(spacing: 0) {
-                        ForEach(Currency.allCases, id: \.self) { currency in
-                            Button(action: {
-                                selectedCurrency = currency
-                            }) {
-                                Text(currency.rawValue)
-                                    .font(.title3)
-                                    .padding()
-                                    .frame(maxWidth: .infinity)
-                                    .background(selectedCurrency == currency ? Color.blue : Color.gray.opacity(0.2))
-                                    .foregroundColor(selectedCurrency == currency ? .white : .primary)
-                            }
-                        }
-                    }
-                    .clipShape(RoundedRectangle(cornerRadius: 12))
-                }
+            VStack(spacing: 16) {
+                Text("Connect Your Bank")
+                    .font(.title2)
+                    .bold()
                 
-                VStack(spacing: 16) {
-                    Text("Connect Your Bank")
-                        .font(.title2)
-                        .bold()
-                    
-                    Text("Link your bank account to get started")
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
-                    
-                    Image(systemName: "banknote")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 60, height: 60)
-                        .foregroundColor(.blue)
-                    
-                    Text("We'll help you connect your bank securely to track your finances")
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
-                        .multilineTextAlignment(.center)
-                        .padding(.horizontal)
-                    
-                    Button(action: {
-                        if let url = tinkService.getAuthorizationUrl() {
-                            isShowingSafari = true
+                Text("Link your bank account to get started")
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
+                
+                Image(systemName: "banknote")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 60, height: 60)
+                    .foregroundColor(.blue)
+                
+                Text("We'll help you connect your bank securely to track your finances")
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal)
+                
+                Button(action: {
+                    Task {
+                        do {
+                            let result = try await tinkService.authenticate()
+                            // Update authState or handle result as needed
+                            tinkService.setAuthState(.authenticated(code: "dummy-code")) // Replace with actual code if available
+                        } catch {
+                            tinkService.setAuthState(.error(error))
                         }
-                    }) {
-                        Text("Connect Bank")
-                            .font(.headline)
-                            .foregroundColor(.white)
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(Color.blue)
-                            .cornerRadius(12)
                     }
-                    .padding(.horizontal, 40)
+                }) {
+                    Text("Connect Bank")
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color.blue)
+                        .cornerRadius(12)
                 }
+                .padding(.horizontal, 40)
             }
             .padding(.top, 40)
             
@@ -99,17 +81,9 @@ struct WelcomeView: View {
             }
             .padding(.bottom)
         }
-        .sheet(isPresented: $isShowingSafari) {
-            if let url = tinkService.getAuthorizationUrl() {
-                SafariView(url: url)
-            }
-        }
-        .onOpenURL { url in
-            Task {
-                await tinkService.handleCallback(url)
-                if case .authenticated = tinkService.authState {
-                    isWelcomeShown = false
-                }
+        .onChange(of: tinkService.authState) { newState in
+            if case .authenticated = newState {
+                isWelcomeShown = false
             }
         }
     }

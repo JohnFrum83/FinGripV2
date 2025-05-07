@@ -27,12 +27,8 @@ struct FinGripApp: App {
                 .environmentObject(localizationManager)
                 .environmentObject(tinkService)
                 .onOpenURL { url in
-                    if url.scheme == "fingrip" {
-                        do {
-                            try await tinkService.handleCallback(url)
-                        } catch {
-                            print("Error handling callback: \(error)")
-                        }
+                    Task {
+                        try? await tinkService.handleCallback(url)
                     }
                 }
                 .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("LanguageChanged"))) { _ in

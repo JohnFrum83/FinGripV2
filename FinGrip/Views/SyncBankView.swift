@@ -1,5 +1,6 @@
 import SwiftUI
 import SafariServices
+import TinkLink
 
 struct Bank: Identifiable, Hashable {
     let id = UUID()
@@ -38,7 +39,7 @@ struct SyncBankView: View {
     @Binding var navigationPath: NavigationPath
     @StateObject private var tinkService = TinkService.shared
     @EnvironmentObject private var contentViewModel: ContentViewModel
-    @State private var isShowingSafari = false
+    @State private var isPresentingTinkLink = false
     @State private var isConnected = false
     @State private var healthScore = 754
     @State private var animatedScore: Double = 0
@@ -68,7 +69,17 @@ struct SyncBankView: View {
                     .padding()
                 
                 VStack(spacing: 16) {
-                    Button(action: openTinkLink) {
+                    Button(action: {
+                        Task {
+                            do {
+                                let result = try await tinkService.authenticate()
+                                // Update authState or handle result as needed
+                                tinkService.setAuthState(.authenticated(code: "dummy-code")) // Replace with actual code if available
+                            } catch {
+                                tinkService.setAuthState(.error(error))
+                            }
+                        }
+                    }) {
                         Text("Connect Bank")
                             .font(.headline)
                             .foregroundColor(.white)
@@ -196,48 +207,11 @@ struct SyncBankView: View {
         } message: {
             Text(errorMessage)
         }
-        .onOpenURL { url in
-            Task {
-                do {
-                    try tinkService.handleCallback(url)
-                    if case .authenticated = tinkService.authState {
-                        isConnected = true
-                        do {
-                            let accounts = try await tinkService.fetchAccounts()
-                            fetchedAccounts = accounts
-                            // Send accounts to ContentViewModel
-                            contentViewModel.currentBalance = accounts.reduce(0) { $0 + $1.balance }
-                            // Fetch transactions and send to ContentViewModel
-                            let transactions = try await tinkService.fetchTransactions()
-                            contentViewModel.transactions = transactions
-                            
-                            // Start the animation after a brief delay
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                                withAnimation(.easeOut(duration: 2.0)) {
-                                    animatedScore = Double(healthScore)
-                                    isAnimating = true
-                                }
-                            }
-                        } catch {
-                            showError = true
-                            errorMessage = error.localizedDescription
-                        }
-                    }
-                } catch {
-                    showError = true
-                    errorMessage = error.localizedDescription
-                }
+        .onChange(of: tinkService.authState) { newState in
+            if case .authenticated = newState {
+                isConnected = true
+                // Optionally fetch accounts/transactions here
             }
-        }
-    }
-    
-    private func openTinkLink() {
-        do {
-            let url = try tinkService.getAuthorizationUrl()
-            UIApplication.shared.open(url)
-        } catch {
-            showError = true
-            errorMessage = error.localizedDescription
         }
     }
 }
@@ -246,5 +220,4 @@ struct SyncBankView: View {
     NavigationStack {
         SyncBankView(navigationPath: .constant(NavigationPath()))
     }
-} 
 } 
