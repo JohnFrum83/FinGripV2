@@ -6,6 +6,7 @@ struct WelcomeView: View {
     @StateObject private var tinkService = TinkService.shared
     @State private var selectedCurrency: Currency = .eur
     @State private var isPresentingTinkLink = false
+    var onBankConnected: (() -> Void)? = nil
     
     enum Currency: String, CaseIterable {
         case usd = "$"
@@ -51,8 +52,8 @@ struct WelcomeView: View {
                     Task {
                         do {
                             let result = try await tinkService.authenticate()
-                            // Update authState or handle result as needed
-                            tinkService.setAuthState(.authenticated(code: "dummy-code")) // Replace with actual code if available
+                            tinkService.setAuthState(.authenticated(code: "dummy-code"))
+                            onBankConnected?()
                         } catch {
                             tinkService.setAuthState(.error(error))
                         }
@@ -71,20 +72,6 @@ struct WelcomeView: View {
             .padding(.top, 40)
             
             Spacer()
-            
-            Button(action: {
-                isWelcomeShown = false
-            }) {
-                Text("Skip for Now")
-                    .font(.subheadline)
-                    .foregroundColor(.secondary)
-            }
-            .padding(.bottom)
-        }
-        .onChange(of: tinkService.authState) { newState in
-            if case .authenticated = newState {
-                isWelcomeShown = false
-            }
         }
     }
 }
